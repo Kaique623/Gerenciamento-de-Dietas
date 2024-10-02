@@ -1,14 +1,9 @@
-using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace Gerenciamento_de_Dietas
 {
     public partial class MainApp : Form
-    {
-        public static MySqlConnection connection = new MySqlConnection("Server=127.0.0.1;Port=3306;Database=dietas;User=root;Password=acesso123;");
-        
-        MySqlDataAdapter adapter = new MySqlDataAdapter();
-
+    {   
         List<string> tables = new List<string>() {"usuario", "dieta", "alimento","refeicao", "refeicao_alimento"};
 
         string current_table = "usuario";
@@ -18,21 +13,9 @@ namespace Gerenciamento_de_Dietas
         public MainApp()
         {
             InitializeComponent();
-            connection.Open();
-
-            LoadAllTables("usuario");
-        }
-
-        void LoadAllTables(string table)
-        {
-            data.Tables.Clear();
-            foreach (string value in tables)
-            {
-                data.Tables.Add();
-                adapter.SelectCommand = new MySqlCommand($"Select * FROM {value}", connection);
-                adapter.Fill(data.Tables[tables.IndexOf(value)]);
-            }
-            UserDataGrid.DataSource = data.Tables[tables.IndexOf(table)];
+            DataBase.connection.Open();
+            data = DataBase.FillDataSet(tables);
+            UserDataGrid.DataSource = data.Tables[0];
         }
 
         private void TabButtonClick(object sender, EventArgs e)
@@ -66,12 +49,87 @@ namespace Gerenciamento_de_Dietas
                 else
                     columnsConditional += $" OR {column.Name} LIKE '%{SearchText.Text}%'";
             }
+            UserDataGrid.DataSource = DataBase.SearchContent(current_table, columnsConditional);
+        }
 
-            DataSet ds = new DataSet();
-            ds.Tables.Add();
-            adapter.SelectCommand = new MySqlCommand($"SELECT * FROM {current_table} {columnsConditional}" , connection);
-            adapter.Fill(ds.Tables[0]);
-            UserDataGrid.DataSource = ds.Tables[0];
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            
+           addForm addScreen = new addForm();
+
+           addScreen.TopLevel = false;
+           this.TopLevel = true;
+           MainSplitScreen.Panel2.Controls.Add(addScreen);
+           UserDataGrid.Visible = false;
+           UserDataGrid.Enabled = false;
+           addScreen.addFormClosed += addFormClosed;
+           MainSplitScreen.Panel1Collapsed = true;
+
+           addScreen.Show();
+        }
+        private void addFormClosed(object sender, EventArgs e)
+        {
+            data = DataBase.FillDataSet(tables);
+            UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
+            UserDataGrid.Visible = true;
+            UserDataGrid.Enabled = true;
+            MainSplitScreen.Panel1Collapsed = false;
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                addForm.id = (int)UserDataGrid.SelectedRows[0].Cells[0].Value;
+                addForm.nomeText = (string)UserDataGrid.SelectedRows[0].Cells[1].Value;
+                addForm.emailtext = (string)UserDataGrid.SelectedRows[0].Cells[2].Value;
+                addForm.tipotext = (string)UserDataGrid.SelectedRows[0].Cells[3].Value;
+                addForm.editMode = true;
+
+                addForm addScreen = new addForm();
+                addScreen.TopLevel = false;
+                this.TopLevel = true;
+                MainSplitScreen.Panel2.Controls.Add(addScreen);
+                UserDataGrid.Visible = false;
+                UserDataGrid.Enabled = false;
+                addScreen.addFormClosed += addFormClosed;
+                MainSplitScreen.Panel1Collapsed = true;
+
+                addScreen.Show();
+            }
+
+            catch
+            {
+                MessageBox.Show("Nenhuma Fileira Selecionada!");
+            }
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            if (UserDataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Nenhuma Fileira Selecionada!");
+            }
+            else
+            {
+                foreach (DataGridViewRow row in UserDataGrid.SelectedRows)
+                {
+                    if (MessageBox.Show($"Deseja Remover o Usuário: {row.Cells[1].Value} ?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        DataBase.ExecuteCommand($"DELETE FROM usuario WHERE id='{row.Cells[0].Value}'");
+                        UserDataGrid.Rows.RemoveAt(row.Index);
+                    }
+
+                }
+            }
+        }
+
+        private void RecarregarPagina_Click(object sender, EventArgs e)
+        {
+            data.Tables.Clear();
+            data = DataBase.FillDataSet(tables);
+            UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
         }
     }
 }

@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainSplitScreen = new System.Windows.Forms.SplitContainer();
+            this.removeButton = new System.Windows.Forms.Button();
             this.RecarregarPagina = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -57,6 +58,7 @@
             // MainSplitScreen.Panel1
             // 
             this.MainSplitScreen.Panel1.BackColor = System.Drawing.Color.LightGreen;
+            this.MainSplitScreen.Panel1.Controls.Add(this.removeButton);
             this.MainSplitScreen.Panel1.Controls.Add(this.RecarregarPagina);
             this.MainSplitScreen.Panel1.Controls.Add(this.EditButton);
             this.MainSplitScreen.Panel1.Controls.Add(this.addButton);
@@ -75,29 +77,44 @@
             this.MainSplitScreen.SplitterWidth = 1;
             this.MainSplitScreen.TabIndex = 0;
             // 
+            // removeButton
+            // 
+            this.removeButton.BackColor = System.Drawing.Color.White;
+            this.removeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.removeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removeButton.Location = new System.Drawing.Point(249, 53);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(96, 41);
+            this.removeButton.TabIndex = 8;
+            this.removeButton.Text = "Remover";
+            this.removeButton.UseVisualStyleBackColor = false;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
+            // 
             // RecarregarPagina
             // 
             this.RecarregarPagina.BackColor = System.Drawing.Color.White;
             this.RecarregarPagina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.RecarregarPagina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RecarregarPagina.Location = new System.Drawing.Point(360, 53);
+            this.RecarregarPagina.Location = new System.Drawing.Point(371, 53);
             this.RecarregarPagina.Name = "RecarregarPagina";
-            this.RecarregarPagina.Size = new System.Drawing.Size(142, 29);
+            this.RecarregarPagina.Size = new System.Drawing.Size(96, 41);
             this.RecarregarPagina.TabIndex = 7;
             this.RecarregarPagina.Text = "Recarregar Dados";
             this.RecarregarPagina.UseVisualStyleBackColor = false;
+            this.RecarregarPagina.Click += new System.EventHandler(this.RecarregarPagina_Click);
             // 
             // EditButton
             // 
             this.EditButton.BackColor = System.Drawing.Color.White;
             this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.EditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditButton.Location = new System.Drawing.Point(193, 53);
+            this.EditButton.Location = new System.Drawing.Point(136, 53);
             this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(142, 29);
+            this.EditButton.Size = new System.Drawing.Size(96, 41);
             this.EditButton.TabIndex = 6;
             this.EditButton.Text = "Editar";
             this.EditButton.UseVisualStyleBackColor = false;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // addButton
             // 
@@ -106,10 +123,11 @@
             this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addButton.Location = new System.Drawing.Point(23, 53);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(142, 29);
+            this.addButton.Size = new System.Drawing.Size(96, 41);
             this.addButton.TabIndex = 5;
             this.addButton.Text = "Adicionar";
             this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // searchButton
             // 
@@ -187,7 +205,7 @@
             this.UserDataGrid.Name = "UserDataGrid";
             this.UserDataGrid.ReadOnly = true;
             this.UserDataGrid.RowTemplate.Height = 25;
-            this.UserDataGrid.Size = new System.Drawing.Size(1142, 558);
+            this.UserDataGrid.Size = new System.Drawing.Size(1142, 570);
             this.UserDataGrid.TabIndex = 0;
             // 
             // MainApp
@@ -209,8 +227,6 @@
         }
 
         #endregion
-
-        private SplitContainer MainSplitScreen;
         private Button DietaTabButton;
         private Button UsuariosTabButton;
         private DataGridView UserDataGrid;
@@ -220,5 +236,7 @@
         private Button addButton;
         private Button searchButton;
         private TextBox SearchText;
+        public SplitContainer MainSplitScreen;
+        private Button removeButton;
     }
 }
