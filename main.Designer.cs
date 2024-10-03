@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainSplitScreen = new System.Windows.Forms.SplitContainer();
+            this.refeicoesTabButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.RecarregarPagina = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
@@ -58,6 +59,7 @@
             // MainSplitScreen.Panel1
             // 
             this.MainSplitScreen.Panel1.BackColor = System.Drawing.Color.LightGreen;
+            this.MainSplitScreen.Panel1.Controls.Add(this.refeicoesTabButton);
             this.MainSplitScreen.Panel1.Controls.Add(this.removeButton);
             this.MainSplitScreen.Panel1.Controls.Add(this.RecarregarPagina);
             this.MainSplitScreen.Panel1.Controls.Add(this.EditButton);
@@ -76,6 +78,18 @@
             this.MainSplitScreen.SplitterDistance = 110;
             this.MainSplitScreen.SplitterWidth = 1;
             this.MainSplitScreen.TabIndex = 0;
+            // 
+            // refeicoesTabButton
+            // 
+            this.refeicoesTabButton.BackColor = System.Drawing.Color.White;
+            this.refeicoesTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refeicoesTabButton.Location = new System.Drawing.Point(1058, 20);
+            this.refeicoesTabButton.Name = "refeicoesTabButton";
+            this.refeicoesTabButton.Size = new System.Drawing.Size(78, 64);
+            this.refeicoesTabButton.TabIndex = 9;
+            this.refeicoesTabButton.Text = "Refeições";
+            this.refeicoesTabButton.UseVisualStyleBackColor = false;
+            this.refeicoesTabButton.Click += new System.EventHandler(this.TabButtonClick);
             // 
             // removeButton
             // 
@@ -151,7 +165,7 @@
             // 
             this.AlimentosButton.BackColor = System.Drawing.Color.White;
             this.AlimentosButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AlimentosButton.Location = new System.Drawing.Point(1048, 18);
+            this.AlimentosButton.Location = new System.Drawing.Point(974, 20);
             this.AlimentosButton.Name = "AlimentosButton";
             this.AlimentosButton.Size = new System.Drawing.Size(78, 64);
             this.AlimentosButton.TabIndex = 2;
@@ -163,7 +177,7 @@
             // 
             this.DietaTabButton.BackColor = System.Drawing.Color.White;
             this.DietaTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DietaTabButton.Location = new System.Drawing.Point(964, 18);
+            this.DietaTabButton.Location = new System.Drawing.Point(890, 20);
             this.DietaTabButton.Name = "DietaTabButton";
             this.DietaTabButton.Size = new System.Drawing.Size(78, 64);
             this.DietaTabButton.TabIndex = 1;
@@ -175,7 +189,7 @@
             // 
             this.UsuariosTabButton.BackColor = System.Drawing.Color.White;
             this.UsuariosTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UsuariosTabButton.Location = new System.Drawing.Point(880, 18);
+            this.UsuariosTabButton.Location = new System.Drawing.Point(806, 20);
             this.UsuariosTabButton.Name = "UsuariosTabButton";
             this.UsuariosTabButton.Size = new System.Drawing.Size(78, 64);
             this.UsuariosTabButton.TabIndex = 0;
@@ -187,7 +201,6 @@
             // 
             this.UserDataGrid.AllowUserToAddRows = false;
             this.UserDataGrid.AllowUserToDeleteRows = false;
-            this.UserDataGrid.AllowUserToResizeColumns = false;
             this.UserDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.UserDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.UserDataGrid.BackgroundColor = System.Drawing.Color.White;
@@ -207,6 +220,7 @@
             this.UserDataGrid.RowTemplate.Height = 25;
             this.UserDataGrid.Size = new System.Drawing.Size(1142, 570);
             this.UserDataGrid.TabIndex = 0;
+            this.UserDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDataGrid_CellContentClick);
             // 
             // MainApp
             // 
@@ -238,5 +252,6 @@
         private TextBox SearchText;
         public SplitContainer MainSplitScreen;
         private Button removeButton;
+        private Button refeicoesTabButton;
     }
 }
