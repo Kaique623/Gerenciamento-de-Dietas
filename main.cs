@@ -16,7 +16,7 @@ namespace Gerenciamento_de_Dietas
             InitializeComponent();
             // Abre conexão e Carrega as Tabelas
             DataBase.connection.Open();
-            data = DataBase.FillDataSet(tables);
+            data = DataBase.FillDataSet(tables, "");
             UserDataGrid.DataSource = data.Tables[0];
         }
 
@@ -40,7 +40,19 @@ namespace Gerenciamento_de_Dietas
                 current_table = "alimento";
                 UserDataGrid.DataSource = data.Tables[2];
             }
-            else if (buttonText == "Refeições")
+
+            if (buttonText != "Refeições")
+            {
+                try
+                {
+                    UserDataGrid.Columns.Remove(visualizar_alimento);
+                }
+                catch
+                {
+                    Console.WriteLine("Coluna Inexistente");
+                }
+            }
+            else if (buttonText == "Refeições" && current_table != "refeicao")
             {
                 current_table = "refeicao";
                 UserDataGrid.DataSource = data.Tables[3];
@@ -54,24 +66,13 @@ namespace Gerenciamento_de_Dietas
                     visualizar_alimento.Visible = true;
                     visualizar_alimento.Text = "Visualizar Alimentos";
                     visualizar_alimento.UseColumnTextForButtonValue = true;
+                    UserDataGrid.Columns.Add(visualizar_alimento);
+                    UserDataGrid.Columns["visualizar_alimento"].DisplayIndex = UserDataGrid.Columns.Count - 1;
+                    UserDataGrid.Columns["id"].DisplayIndex = 0;
                 }
                 catch
                 {
                     Console.WriteLine("Erro ao adicionar Coluna (Já Existente)");
-                }
-
-
-                UserDataGrid.Columns.Add(visualizar_alimento);
-            }
-            if (buttonText != "Refeições")
-            {
-                try
-                {
-                    UserDataGrid.Columns.Remove(visualizar_alimento);
-                }
-                catch
-                {
-                    Console.WriteLine("Coluna Inexistente");
                 }
             }
         }
@@ -113,7 +114,7 @@ namespace Gerenciamento_de_Dietas
         private void addFormClosed(object sender, EventArgs e)
         {
             // Redefine as Intancias (UserDatagrid, Painel)
-            data = DataBase.FillDataSet(tables);
+            data = DataBase.FillDataSet(tables, "");
             UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
             UserDataGrid.Visible = true;
             UserDataGrid.Enabled = true;
@@ -185,7 +186,7 @@ namespace Gerenciamento_de_Dietas
         private void RecarregarPagina_Click(object sender, EventArgs e)
         {
             data.Tables.Clear();
-            data = DataBase.FillDataSet(tables);
+            data = DataBase.FillDataSet(tables, "");
             UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
             MessageBox.Show("Dados Recarregados!");
         }
@@ -195,6 +196,7 @@ namespace Gerenciamento_de_Dietas
             if (current_table == "refeicao" && UserDataGrid.Columns[e.ColumnIndex].CellType == typeof(DataGridViewButtonCell))
             {
                 addForm addScreen = new addForm();
+                addScreen.id = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[0].Value);
                 addScreen.TopLevel = false;
                 UserDataGrid.Visible = false;
                 UserDataGrid.Enabled = false;
@@ -205,11 +207,7 @@ namespace Gerenciamento_de_Dietas
                 addScreen.Alimentos = true;
                 addScreen.addFormClosed += addFormClosed;
                 addScreen.Show();
-            }
-            else
-            {
-                MessageBox.Show(Convert.ToString(typeof(DataGridViewButtonCell)));
-                MessageBox.Show(Convert.ToString(UserDataGrid.Columns[e.ColumnIndex].CellType));
+
             }
         }
     }

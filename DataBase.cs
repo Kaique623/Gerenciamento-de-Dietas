@@ -12,8 +12,9 @@ namespace Gerenciamento_de_Dietas
     {
         public static MySqlConnection connection = new MySqlConnection("Server=127.0.0.1;Port=3306;Database=dietas;User=root;Password=acesso123;");
         public static MySqlDataAdapter adapter = new MySqlDataAdapter();
+        public static MySqlCommand mycommand = new MySqlCommand();
 
-        public static DataSet FillDataSet(List<string> tables){
+        public static DataSet FillDataSet(List<string> tables, string condition){
 
             DataSet data = new DataSet();
             
@@ -21,7 +22,7 @@ namespace Gerenciamento_de_Dietas
             foreach (string value in tables)
             {
                 data.Tables.Add();
-                adapter.SelectCommand = new MySqlCommand($"Select * FROM {value}", connection);
+                adapter.SelectCommand = new MySqlCommand($"Select * FROM {value} {condition}", connection);
                 adapter.Fill(data.Tables[tables.IndexOf(value)]);
             }
 
@@ -45,6 +46,16 @@ namespace Gerenciamento_de_Dietas
         public static object ExecuteScalarCommand(string query)
         {
             return new MySqlCommand(query, connection).ExecuteScalar();
+        }
+
+        public static DataTable returnColumn(string query)
+        {
+            DataTable ds = new DataTable();
+
+            adapter.SelectCommand = new MySqlCommand(query, connection);
+            adapter.Fill(ds);
+
+            return ds;
         }
     }
 }

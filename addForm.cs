@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System.Data;
+using iTextSharp.text;
+using iTextSharp;
+using iTextSharp.text.pdf; 
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data;
+using System.IO;
 
 namespace Gerenciamento_de_Dietas
 {
@@ -24,6 +20,7 @@ namespace Gerenciamento_de_Dietas
         public string currentTable = "";
         public bool Alimentos = false;
         public string idRefeicao = "";
+
 
         public addForm()
         {
@@ -153,9 +150,9 @@ namespace Gerenciamento_de_Dietas
             }
             else if (currentTable == "refeicao" && Alimentos)
             {
+                id_textbox.Text = id;
                 AddTabControl.SelectedIndex = 4;
-
-                DataSet ds = DataBase.FillDataSet(new List<string>() { "refeicao_alimento" });
+                DataSet ds = DataBase.FillDataSet(new List<string>() { "refeicao_alimento" }, $"WHERE id_refeicao='{id_textbox.Text}'");
                 refeicao_alimento_datagrid.DataSource = ds.Tables[0];
             }
             else if (currentTable == "refeicao")
@@ -165,7 +162,80 @@ namespace Gerenciamento_de_Dietas
                 idDietaTextBox.Text = entry3;
                 AddTabControl.SelectedIndex = 3;
             }
-    
+        }
+
+        private void adicionar_refeicaoButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataBase.ExecuteCommand($"INSERT INTO refeicao_alimento (id_refeicao, id_alimento, quantidade) VALUE ('{id_textbox.Text}' ,'{id_alimentoTextBox.Text}', '{quantidadeTextBox.Text}')");
+            }
+            catch
+            {
+                DataBase.ExecuteCommand($"UPDATE refeicao_alimento SET quantidade = quantidade + {quantidadeTextBox.Text} WHERE id_alimento={id_alimentoTextBox.Text}");
+                
+            }
+            DataBase.ExecuteCommand("DELETE FROM refeicao_alimento WHERE quantidade < 1");
+            DataSet ds = DataBase.FillDataSet(new List<string>() { "refeicao_alimento" }, $"WHERE id_refeicao={id_textbox.Text}");
+            refeicao_alimento_datagrid.DataSource = ds.Tables[0];
+         
+        }
+
+        private void gerarRelatorio(object sender, EventArgs e)
+        {
+
+
+
+            Dictionary<string, string> nutricional = new Dictionary<string, string>() {
+                { "calorias", "" },
+                { "proteinas", "" },
+                { "carboidratos", "" },
+                { "gorduras", "" }
+            };
+
+            foreach (string key in nutricional.Keys)
+            {
+                double aux = (double)DataBase.ExecuteScalarCommand(@$"SELECT SUM(alimento.{key}*quantidade) 
+                                                            FROM refeicao_alimento
+                                                            JOIN alimento on alimento.id = id_alimento
+                                                            WHERE id_refeicao = '{id_textbox.Text}'");
+                nutricional[key] = aux.ToString("F");
+            }
+
+            string output = Directory.GetCurrentDirectory() + "relatorio.pdf";
+
+            Document document = new Document(PageSize.A4);
+            document.SetMargins(40, 40, 40, 40);
+            document.AddCreationDate();
+            var writer = PdfWriter.GetInstance(document, new FileStream(output, FileMode.Create));
+            document.Open();
+
+            string Alimentos = "";
+
+            DataTable dt = DataBase.returnColumn($@"SELECT alimento.nome	
+                                                    FROM refeicao_alimento
+                                                    JOIN dietas.alimento
+                                                    ON alimento.id = refeicao_alimento.id_alimento
+                                                    AND refeicao_alimento.id_refeicao = {id}");
+
+            foreach (var row in Enumerable.Range(0, dt.Rows.Count))
+            {
+                Alimentos += $"{(string)dt.Rows[row][0]}; ";    
+            }
+               
+            Paragraph titulo = new Paragraph();
+            titulo.Alignment = Element.ALIGN_JUSTIFIED;
+            titulo.Add($"Relatorio;\n" +
+                       $"Calorias: {nutricional["calorias"]}\n" +
+                       $"Proteinas: {nutricional["proteinas"]}\n" +
+                       $"Carboidratos: {nutricional["carboidratos"]}\n" +
+                       $"Gorduras: {nutricional["gorduras"]}\n" +
+                       $"Quantidade de Alimentos: {refeicao_alimento_datagrid.Rows.Count}\n" +
+                       $"Alimentos: {Alimentos}\n");
+
+            document.Add(titulo);
+            document.Close();
+            System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + "/net6.0-windowsrelatorio.pdf");
         }
     }
 }
