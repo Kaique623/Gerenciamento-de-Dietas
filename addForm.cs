@@ -235,7 +235,6 @@ namespace Gerenciamento_de_Dietas
 
             document.Add(titulo);
             document.Close();
-            System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + "/net6.0-windowsrelatorio.pdf");
         }
     }
 }
