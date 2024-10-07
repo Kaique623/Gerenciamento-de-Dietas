@@ -14,64 +14,90 @@ namespace Gerenciamento_de_Dietas
         public MainApp()
         {
             InitializeComponent();
-            // Abre conexão e Carrega as Tabelas
+
+            // Abre a conexão com o banco de dados.
             DataBase.connection.Open();
+
+            // Preenche o DataSet com as tabelas de dados especificadas (armazenadas na variável 'tables').
+            // O segundo argumento "" representa uma possível condição ou filtro de consulta (aqui está vazio).
             data = DataBase.FillDataSet(tables, "");
+
+            // Define a fonte de dados do DataGrid como a primeira tabela do DataSet.
             UserDataGrid.DataSource = data.Tables[0];
         }
 
         private void TabButtonClick(object sender, EventArgs e)
         {
+            try
+            {
+                // Tenta remover a coluna "visualizar_alimento" do DataGrid caso ela já exista.
+                UserDataGrid.Columns.Remove(visualizar_alimento);
+            }
+            catch
+            {
+                // Caso a coluna "visualizar_alimento" não exista, exibe uma mensagem no console.
+                Console.WriteLine("Coluna Inexistente");
+            }
+
+            // Permite que o DataGrid gere as colunas automaticamente com base no DataSource.
             UserDataGrid.AutoGenerateColumns = true;
+
+            // Obtém o texto do botão que disparou o evento.
             string buttonText = ((Button)sender).Text;
-            // Muda DataGrid Atual
+
+            // Muda o DataGrid para a tabela de "Usuários" se o botão clicado for "Usuários".
             if (buttonText == "Usuários")
             {
+                // Define a tabela atual como "usuario" e atualiza o DataSource com os dados de usuários.
                 current_table = "usuario";
                 UserDataGrid.DataSource = data.Tables[0];
             }
+            // Muda o DataGrid para a tabela de "Dietas" se o botão clicado for "Dietas".
             else if (buttonText == "Dietas")
             {
+                // Define a tabela atual como "dieta" e atualiza o DataSource com os dados de dietas.
                 current_table = "dieta";
                 UserDataGrid.DataSource = data.Tables[1];
             }
+            // Muda o DataGrid para a tabela de "Alimentos" se o botão clicado for "Alimentos".
             else if (buttonText == "Alimentos")
             {
+                // Define a tabela atual como "alimento" e atualiza o DataSource com os dados de alimentos.
                 current_table = "alimento";
                 UserDataGrid.DataSource = data.Tables[2];
             }
-
-            if (buttonText != "Refeições")
+            // Muda o DataGrid para a tabela de "Refeições" se o botão clicado for "Refeições".
+            else if (buttonText == "Refeições")
             {
-                try
-                {
-                    UserDataGrid.Columns.Remove(visualizar_alimento);
-                }
-                catch
-                {
-                    Console.WriteLine("Coluna Inexistente");
-                }
-            }
-            else if (buttonText == "Refeições" && current_table != "refeicao")
-            {
+                // Define a tabela atual como "refeicao" e atualiza o DataSource com os dados de refeições.
                 current_table = "refeicao";
                 UserDataGrid.DataSource = data.Tables[3];
+
                 try
                 {
+                    // Desativa a geração automática de colunas para personalizar as colunas manualmente.
                     UserDataGrid.AutoGenerateColumns = false;
 
-                    visualizar_alimento.HeaderText = "";
-                    visualizar_alimento.Name = "visualizar_alimento";
-                    visualizar_alimento.ReadOnly = true;
-                    visualizar_alimento.Visible = true;
-                    visualizar_alimento.Text = "Visualizar Alimentos";
-                    visualizar_alimento.UseColumnTextForButtonValue = true;
+                    // Configura a coluna "visualizar_alimento" como um botão.
+                    visualizar_alimento.HeaderText = "";  // O cabeçalho da coluna será vazio.
+                    visualizar_alimento.Name = "visualizar_alimento";  // Nome da coluna.
+                    visualizar_alimento.ReadOnly = true;  // Define a coluna como somente leitura.
+                    visualizar_alimento.Visible = true;  // Torna a coluna visível.
+                    visualizar_alimento.Text = "Visualizar Alimentos";  // Texto exibido no botão.
+                    visualizar_alimento.UseColumnTextForButtonValue = true;  // Define o texto do botão.
+
+                    // Adiciona a coluna de botão "visualizar_alimento" ao DataGrid.
                     UserDataGrid.Columns.Add(visualizar_alimento);
+
+                    // Define a posição da coluna "visualizar_alimento" para ser a última.
                     UserDataGrid.Columns["visualizar_alimento"].DisplayIndex = UserDataGrid.Columns.Count - 1;
+
+                    // Define a posição da coluna "id" para ser a primeira.
                     UserDataGrid.Columns["id"].DisplayIndex = 0;
                 }
                 catch
                 {
+                    // Caso já exista uma coluna com o nome "visualizar_alimento", exibe uma mensagem no console.
                     Console.WriteLine("Erro ao adicionar Coluna (Já Existente)");
                 }
             }
@@ -80,134 +106,210 @@ namespace Gerenciamento_de_Dietas
         private void searchButton_Click(object sender, EventArgs e)
         {
             string columnsConditional = "WHERE ";
-            // Gera as Condições de Pesquisa
+
+            // Gera as condições de pesquisa para cada coluna
             foreach (DataGridViewColumn column in UserDataGrid.Columns)
             {
                 if (columnsConditional == "WHERE ")
+                    // Primeira condição de pesquisa
                     columnsConditional += $"{column.Name} LIKE '%{SearchText.Text}%'";
                 else
+                    // Condição OR para as colunas seguintes
                     columnsConditional += $" OR {column.Name} LIKE '%{SearchText.Text}%'";
             }
-            // Mostra elementos Próximos aos pesquisados
+
+            // Atualiza o DataGrid com os resultados da busca
             UserDataGrid.DataSource = DataBase.SearchContent(current_table, columnsConditional);
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-           addForm addScreen = new addForm();
+            // Criação da tela de adição
+            addForm addScreen = new addForm();
 
-           addScreen.TopLevel = false;
-           this.TopLevel = true;
-           MainSplitScreen.Panel2.Controls.Add(addScreen);
-           // Desabilita o UserDataGrid Para inserção da tela de Adição
-           UserDataGrid.Visible = false;
-           UserDataGrid.Enabled = false;
-           // Adiciona Função a ser chamada quando o Formulário for fechado
-           addScreen.addFormClosed += addFormClosed;
-           addScreen.currentTable = current_table;
-           // Desabilita Cabeçalho/Dashboard
-           MainSplitScreen.Panel1Collapsed = true;
+            // Configuração de hierarquia dos formulários
+            addScreen.TopLevel = false;
+            this.TopLevel = true;
 
-           addScreen.Show();
+            // Adiciona o formulário de adição ao painel secundário
+            MainSplitScreen.Panel2.Controls.Add(addScreen);
+
+            // Desabilita e oculta o UserDataGrid
+            UserDataGrid.Visible = false;
+            UserDataGrid.Enabled = false;
+
+            // Registra o evento para quando o formulário de adição for fechado
+            addScreen.addFormClosed += addFormClosed;
+
+            // Define a tabela atual no formulário de adição
+            addScreen.currentTable = current_table;
+
+            // Inicializa a tela de adição
+            addScreen.startup();
+
+            // Colapsa o painel principal (cabeçalho ou dashboard)
+            MainSplitScreen.Panel1Collapsed = true;
+
+            // Exibe o formulário de adição
+            addScreen.Show();
         }
 
         private void addFormClosed(object sender, EventArgs e)
         {
-            // Redefine as Intancias (UserDatagrid, Painel)
+            // Recarrega as tabelas de dados do banco de dados
             data = DataBase.FillDataSet(tables, "");
+
+            // Define a fonte de dados do UserDataGrid para a tabela atualizada
             UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
+
+            // Torna o UserDataGrid visível e habilitado novamente
             UserDataGrid.Visible = true;
             UserDataGrid.Enabled = true;
+
+            // Reexpande o painel principal (cabeçalho ou dashboard)
             MainSplitScreen.Panel1Collapsed = false;
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
+            // Cria uma nova tela de adição no modo de edição
+            addForm addScreen = new addForm();
+            addScreen.editMode = true;
 
             try
             {
-                //Coleta as Informações da Fileira
-                addForm addScreen = new addForm();
+                // Coleta os dados da linha selecionada no UserDataGrid
+
+                // Coleta o valor da primeira célula (ID)
                 addScreen.id = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[0].Value);
+
+                // Coleta o valor da segunda e terceira célula (campos de entrada)
                 addScreen.entry1 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[1].Value);
                 addScreen.entry2 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[2].Value);
-                if (current_table != "dieta")
-                addScreen.entry3 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[3].Value);
 
+                // Se a tabela atual não for "dieta", coleta o valor da terceira entrada
+                if (current_table != "dieta")
+                    addScreen.entry3 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[3].Value);
+
+                // Se a tabela atual for "alimento", coleta valores extras
                 if (current_table == "alimento")
                 {
                     addScreen.entry4 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[4].Value);
                     addScreen.entry5 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[5].Value);
                 }
 
-                addScreen.editMode = true;
+                // Define a tabela atual no formulário de edição
                 addScreen.currentTable = current_table;
 
-                // Abre Tela de adição
+                // Configura a tela de edição
                 addScreen.TopLevel = false;
                 this.TopLevel = true;
+
+                // Adiciona o formulário de edição ao painel secundário
                 MainSplitScreen.Panel2.Controls.Add(addScreen);
+
+                // Desabilita o UserDataGrid durante a edição
                 UserDataGrid.Visible = false;
                 UserDataGrid.Enabled = false;
+
+                // Registra o evento para restaurar a interface após fechar o formulário de edição
                 addScreen.addFormClosed += addFormClosed;
+
+                // Colapsa o painel principal (cabeçalho ou dashboard) durante a edição
                 MainSplitScreen.Panel1Collapsed = true;
 
+                // Inicializa o formulário de edição
+                addScreen.startup();
+
+                // Exibe o formulário de edição
                 addScreen.Show();
             }
-
             catch
             {
+                // Caso nenhuma linha esteja selecionada, exibe uma mensagem de erro
                 MessageBox.Show("Nenhuma Fileira Selecionada!");
             }
-
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
+            // Verifica se nenhuma linha está selecionada
             if (UserDataGrid.SelectedRows.Count == 0)
             {
+                // Exibe uma mensagem de alerta ao usuário
                 MessageBox.Show("Nenhuma Fileira Selecionada!");
             }
             else
             {
+                // Itera sobre as linhas selecionadas
                 foreach (DataGridViewRow row in UserDataGrid.SelectedRows)
                 {
+                    // Confirma a remoção do item
                     if (MessageBox.Show($"Deseja Remover: {row.Cells[1].Value} ?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        //Remoção do Usuário selecionado
+                        // Executa o comando SQL para remover o usuário selecionado da tabela
                         DataBase.ExecuteCommand($"DELETE FROM {current_table} WHERE id='{row.Cells[0].Value}'");
+
+                        // Remove a linha do UserDataGrid
                         UserDataGrid.Rows.RemoveAt(row.Index);
                     }
-
                 }
             }
         }
 
         private void RecarregarPagina_Click(object sender, EventArgs e)
         {
+            // Limpa o conjunto de dados atual para preparar para o recarregamento
             data.Tables.Clear();
+
+            // Recarrega os dados do banco de dados
             data = DataBase.FillDataSet(tables, "");
+
+            // Atualiza a fonte de dados do UserDataGrid com a tabela correspondente
             UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
+
+            // Informa ao usuário que os dados foram recarregados
             MessageBox.Show("Dados Recarregados!");
         }
 
         private void UserDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Verifica se a tabela atual é "refeicao" e se a célula clicada é um botão
             if (current_table == "refeicao" && UserDataGrid.Columns[e.ColumnIndex].CellType == typeof(DataGridViewButtonCell))
             {
+                // Cria uma nova instância do formulário de adição
                 addForm addScreen = new addForm();
+
+                // Coleta o ID da refeição da linha clicada
                 addScreen.id = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[0].Value);
+
+                // Configura o formulário para ser adicionado ao painel secundário
                 addScreen.TopLevel = false;
+
+                // Desabilita e oculta o UserDataGrid durante a edição
                 UserDataGrid.Visible = false;
                 UserDataGrid.Enabled = false;
-                MainSplitScreen.Panel2.Controls.Add(addScreen);
-                addScreen.currentTable = current_table;
-                MainSplitScreen.Panel1Collapsed = true;
-                this.TopLevel = true;
-                addScreen.Alimentos = true;
-                addScreen.addFormClosed += addFormClosed;
-                addScreen.Show();
 
+                // Adiciona o formulário de adição ao painel secundário
+                MainSplitScreen.Panel2.Controls.Add(addScreen);
+
+                // Define a tabela atual no formulário de adição
+                addScreen.currentTable = current_table;
+
+                // Colapsa o painel principal para melhor visualização
+                MainSplitScreen.Panel1Collapsed = true;
+
+                // Define a propriedade Alimentos como verdadeira
+                addScreen.Alimentos = true;
+
+                // Registra o método addFormClosed para restaurar a interface após o fechamento do formulário de adição
+                addScreen.addFormClosed += addFormClosed;
+
+                // Inicializa a tela de adição
+                addScreen.startup();
+
+                // Exibe o formulário de adição
+                addScreen.Show();
             }
         }
     }

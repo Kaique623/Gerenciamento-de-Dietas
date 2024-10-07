@@ -41,6 +41,8 @@
             this.id_textbox = new System.Windows.Forms.TextBox();
             this.AddTabControl = new System.Windows.Forms.TabControl();
             this.usuarioTabPage = new System.Windows.Forms.TabPage();
+            this.dieta_label = new System.Windows.Forms.Label();
+            this.dieta_combobox = new System.Windows.Forms.ComboBox();
             this.alimentoTabPage = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -71,6 +73,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.horarioTextBox = new System.Windows.Forms.TextBox();
             this.refeicao_alimentos = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.quantidadeTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -78,7 +81,6 @@
             this.id_alimentoTextBox = new System.Windows.Forms.TextBox();
             this.sairButton = new System.Windows.Forms.Button();
             this.refeicao_alimento_datagrid = new System.Windows.Forms.DataGridView();
-            this.button7 = new System.Windows.Forms.Button();
             this.AddTabControl.SuspendLayout();
             this.usuarioTabPage.SuspendLayout();
             this.alimentoTabPage.SuspendLayout();
@@ -94,7 +96,7 @@
             this.CancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CancelButton.ForeColor = System.Drawing.Color.Black;
-            this.CancelButton.Location = new System.Drawing.Point(491, 366);
+            this.CancelButton.Location = new System.Drawing.Point(491, 403);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(172, 35);
             this.CancelButton.TabIndex = 0;
@@ -108,7 +110,7 @@
             this.confirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.confirmButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.confirmButton.ForeColor = System.Drawing.Color.Black;
-            this.confirmButton.Location = new System.Drawing.Point(491, 325);
+            this.confirmButton.Location = new System.Drawing.Point(491, 362);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(172, 35);
             this.confirmButton.TabIndex = 1;
@@ -183,6 +185,7 @@
             this.id_label.Size = new System.Drawing.Size(30, 25);
             this.id_label.TabIndex = 9;
             this.id_label.Text = "ID";
+            this.id_label.Visible = false;
             // 
             // id_textbox
             // 
@@ -192,6 +195,7 @@
             this.id_textbox.Name = "id_textbox";
             this.id_textbox.Size = new System.Drawing.Size(172, 32);
             this.id_textbox.TabIndex = 8;
+            this.id_textbox.Visible = false;
             // 
             // AddTabControl
             // 
@@ -200,14 +204,16 @@
             this.AddTabControl.Controls.Add(this.DietaTabPage);
             this.AddTabControl.Controls.Add(this.RefeicaoTabPage);
             this.AddTabControl.Controls.Add(this.refeicao_alimentos);
-            this.AddTabControl.Location = new System.Drawing.Point(-9, 0);
+            this.AddTabControl.Location = new System.Drawing.Point(-9, -24);
             this.AddTabControl.Name = "AddTabControl";
             this.AddTabControl.SelectedIndex = 0;
-            this.AddTabControl.Size = new System.Drawing.Size(1227, 710);
+            this.AddTabControl.Size = new System.Drawing.Size(1227, 713);
             this.AddTabControl.TabIndex = 10;
             // 
             // usuarioTabPage
             // 
+            this.usuarioTabPage.Controls.Add(this.dieta_label);
+            this.usuarioTabPage.Controls.Add(this.dieta_combobox);
             this.usuarioTabPage.Controls.Add(this.tipo_combobox);
             this.usuarioTabPage.Controls.Add(this.id_label);
             this.usuarioTabPage.Controls.Add(this.CancelButton);
@@ -221,11 +227,29 @@
             this.usuarioTabPage.Location = new System.Drawing.Point(4, 24);
             this.usuarioTabPage.Name = "usuarioTabPage";
             this.usuarioTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.usuarioTabPage.Size = new System.Drawing.Size(1219, 682);
+            this.usuarioTabPage.Size = new System.Drawing.Size(1219, 685);
             this.usuarioTabPage.TabIndex = 0;
             this.usuarioTabPage.Text = "Usuário";
             this.usuarioTabPage.UseVisualStyleBackColor = true;
-            this.usuarioTabPage.Paint += new System.Windows.Forms.PaintEventHandler(this.usuarioTabPage_Paint);
+            // 
+            // dieta_label
+            // 
+            this.dieta_label.AutoSize = true;
+            this.dieta_label.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dieta_label.Location = new System.Drawing.Point(491, 286);
+            this.dieta_label.Name = "dieta_label";
+            this.dieta_label.Size = new System.Drawing.Size(56, 25);
+            this.dieta_label.TabIndex = 11;
+            this.dieta_label.Text = "Dieta";
+            // 
+            // dieta_combobox
+            // 
+            this.dieta_combobox.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dieta_combobox.FormattingEnabled = true;
+            this.dieta_combobox.Location = new System.Drawing.Point(491, 314);
+            this.dieta_combobox.Name = "dieta_combobox";
+            this.dieta_combobox.Size = new System.Drawing.Size(174, 33);
+            this.dieta_combobox.TabIndex = 10;
             // 
             // alimentoTabPage
             // 
@@ -244,7 +268,7 @@
             this.alimentoTabPage.Location = new System.Drawing.Point(4, 24);
             this.alimentoTabPage.Name = "alimentoTabPage";
             this.alimentoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.alimentoTabPage.Size = new System.Drawing.Size(1219, 682);
+            this.alimentoTabPage.Size = new System.Drawing.Size(1219, 591);
             this.alimentoTabPage.TabIndex = 1;
             this.alimentoTabPage.Text = "Alimento";
             this.alimentoTabPage.UseVisualStyleBackColor = true;
@@ -378,7 +402,7 @@
             this.DietaTabPage.Location = new System.Drawing.Point(4, 24);
             this.DietaTabPage.Name = "DietaTabPage";
             this.DietaTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DietaTabPage.Size = new System.Drawing.Size(1219, 682);
+            this.DietaTabPage.Size = new System.Drawing.Size(1219, 591);
             this.DietaTabPage.TabIndex = 2;
             this.DietaTabPage.Text = "Dieta";
             this.DietaTabPage.UseVisualStyleBackColor = true;
@@ -460,7 +484,7 @@
             this.RefeicaoTabPage.Location = new System.Drawing.Point(4, 24);
             this.RefeicaoTabPage.Name = "RefeicaoTabPage";
             this.RefeicaoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.RefeicaoTabPage.Size = new System.Drawing.Size(1219, 682);
+            this.RefeicaoTabPage.Size = new System.Drawing.Size(1219, 591);
             this.RefeicaoTabPage.TabIndex = 3;
             this.RefeicaoTabPage.Text = "Refeicao";
             this.RefeicaoTabPage.UseVisualStyleBackColor = true;
@@ -499,9 +523,9 @@
             this.id_dietaLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.id_dietaLabel.Location = new System.Drawing.Point(471, 196);
             this.id_dietaLabel.Name = "id_dietaLabel";
-            this.id_dietaLabel.Size = new System.Drawing.Size(91, 25);
+            this.id_dietaLabel.Size = new System.Drawing.Size(56, 25);
             this.id_dietaLabel.TabIndex = 15;
-            this.id_dietaLabel.Text = "ID (Dieta)";
+            this.id_dietaLabel.Text = "Dieta";
             // 
             // idDietaTextBox
             // 
@@ -560,10 +584,24 @@
             this.refeicao_alimentos.Location = new System.Drawing.Point(4, 24);
             this.refeicao_alimentos.Name = "refeicao_alimentos";
             this.refeicao_alimentos.Padding = new System.Windows.Forms.Padding(3);
-            this.refeicao_alimentos.Size = new System.Drawing.Size(1219, 682);
+            this.refeicao_alimentos.Size = new System.Drawing.Size(1219, 591);
             this.refeicao_alimentos.TabIndex = 4;
             this.refeicao_alimentos.Text = "refeicao_alimento";
             this.refeicao_alimentos.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Gainsboro;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button7.ForeColor = System.Drawing.Color.Black;
+            this.button7.Location = new System.Drawing.Point(918, 27);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(116, 35);
+            this.button7.TabIndex = 23;
+            this.button7.Text = "Gerar Relatorio";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.gerarRelatorio);
             // 
             // label7
             // 
@@ -586,9 +624,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(17, 15);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 15);
+            this.label6.Size = new System.Drawing.Size(56, 15);
             this.label6.TabIndex = 20;
-            this.label6.Text = "ID (Alimento)";
+            this.label6.Text = "Alimento";
             // 
             // adicionar_refeicaoButton
             // 
@@ -633,20 +671,6 @@
             this.refeicao_alimento_datagrid.RowTemplate.Height = 25;
             this.refeicao_alimento_datagrid.Size = new System.Drawing.Size(1119, 463);
             this.refeicao_alimento_datagrid.TabIndex = 0;
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.Gainsboro;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button7.ForeColor = System.Drawing.Color.Black;
-            this.button7.Location = new System.Drawing.Point(918, 27);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(116, 35);
-            this.button7.TabIndex = 23;
-            this.button7.Text = "Gerar Relatorio";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.gerarRelatorio);
             // 
             // addForm
             // 
@@ -734,5 +758,7 @@
         private Label label7;
         private TextBox quantidadeTextBox;
         private Button button7;
+        private Label dieta_label;
+        private ComboBox dieta_combobox;
     }
 }

@@ -17,13 +17,35 @@ namespace Gerenciamento_de_Dietas
         public static DataSet FillDataSet(List<string> tables, string condition){
 
             DataSet data = new DataSet();
-            
+
+            string startcondition = condition;
 
             foreach (string value in tables)
             {
+                
+                string query = "SELECT * FROM";
+                if (value == "usuario")
+                {
+                    query = "SELECT usuario.id AS 'Id', usuario.nome AS 'Nome', usuario.email AS 'Email', usuario.tipo AS 'Tipo', dieta.nome AS 'Dieta' FROM ";
+                    condition += "LEFT JOIN dieta ON dieta.id = usuario.dieta";
+                }
+                else if (value == "refeicao")
+                {
+                    query = "SELECT refeicao.id as 'Id', refeicao.nome as 'Nome', refeicao.horario as 'Horario', dieta.nome as 'Dieta' FROM ";
+                    condition += "LEFT JOIN dieta ON dieta.id = refeicao.id_dieta";
+                }
+                else if (value == "refeicao_alimento")
+                {
+                    query = "SELECT refeicao.nome AS 'refeicao', alimento.nome AS 'alimento', refeicao_alimento.quantidade FROM ";
+                    condition = "LEFT JOIN refeicao ON refeicao.id = refeicao_alimento.id_refeicao " +
+                                "LEFT JOIN alimento ON alimento.id = refeicao_alimento.id_alimento ";
+                }
+
+                condition += startcondition;
                 data.Tables.Add();
-                adapter.SelectCommand = new MySqlCommand($"Select * FROM {value} {condition}", connection);
+                adapter.SelectCommand = new MySqlCommand($"{query} {value} {condition}", connection);
                 adapter.Fill(data.Tables[tables.IndexOf(value)]);
+                condition = startcondition;
             }
 
             return data;
