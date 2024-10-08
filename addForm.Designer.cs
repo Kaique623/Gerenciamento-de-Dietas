@@ -81,6 +81,8 @@
             this.id_alimentoTextBox = new System.Windows.Forms.TextBox();
             this.sairButton = new System.Windows.Forms.Button();
             this.refeicao_alimento_datagrid = new System.Windows.Forms.DataGridView();
+            this.medida_textbox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.AddTabControl.SuspendLayout();
             this.usuarioTabPage.SuspendLayout();
             this.alimentoTabPage.SuspendLayout();
@@ -268,7 +270,7 @@
             this.alimentoTabPage.Location = new System.Drawing.Point(4, 24);
             this.alimentoTabPage.Name = "alimentoTabPage";
             this.alimentoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.alimentoTabPage.Size = new System.Drawing.Size(1219, 591);
+            this.alimentoTabPage.Size = new System.Drawing.Size(1219, 685);
             this.alimentoTabPage.TabIndex = 1;
             this.alimentoTabPage.Text = "Alimento";
             this.alimentoTabPage.UseVisualStyleBackColor = true;
@@ -402,7 +404,7 @@
             this.DietaTabPage.Location = new System.Drawing.Point(4, 24);
             this.DietaTabPage.Name = "DietaTabPage";
             this.DietaTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DietaTabPage.Size = new System.Drawing.Size(1219, 591);
+            this.DietaTabPage.Size = new System.Drawing.Size(1219, 685);
             this.DietaTabPage.TabIndex = 2;
             this.DietaTabPage.Text = "Dieta";
             this.DietaTabPage.UseVisualStyleBackColor = true;
@@ -484,7 +486,7 @@
             this.RefeicaoTabPage.Location = new System.Drawing.Point(4, 24);
             this.RefeicaoTabPage.Name = "RefeicaoTabPage";
             this.RefeicaoTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.RefeicaoTabPage.Size = new System.Drawing.Size(1219, 591);
+            this.RefeicaoTabPage.Size = new System.Drawing.Size(1219, 685);
             this.RefeicaoTabPage.TabIndex = 3;
             this.RefeicaoTabPage.Text = "Refeicao";
             this.RefeicaoTabPage.UseVisualStyleBackColor = true;
@@ -573,6 +575,8 @@
             // 
             // refeicao_alimentos
             // 
+            this.refeicao_alimentos.Controls.Add(this.label8);
+            this.refeicao_alimentos.Controls.Add(this.medida_textbox);
             this.refeicao_alimentos.Controls.Add(this.button7);
             this.refeicao_alimentos.Controls.Add(this.label7);
             this.refeicao_alimentos.Controls.Add(this.quantidadeTextBox);
@@ -584,7 +588,7 @@
             this.refeicao_alimentos.Location = new System.Drawing.Point(4, 24);
             this.refeicao_alimentos.Name = "refeicao_alimentos";
             this.refeicao_alimentos.Padding = new System.Windows.Forms.Padding(3);
-            this.refeicao_alimentos.Size = new System.Drawing.Size(1219, 591);
+            this.refeicao_alimentos.Size = new System.Drawing.Size(1219, 685);
             this.refeicao_alimentos.TabIndex = 4;
             this.refeicao_alimentos.Text = "refeicao_alimento";
             this.refeicao_alimentos.UseVisualStyleBackColor = true;
@@ -630,7 +634,7 @@
             // 
             // adicionar_refeicaoButton
             // 
-            this.adicionar_refeicaoButton.Location = new System.Drawing.Point(273, 31);
+            this.adicionar_refeicaoButton.Location = new System.Drawing.Point(389, 31);
             this.adicionar_refeicaoButton.Name = "adicionar_refeicaoButton";
             this.adicionar_refeicaoButton.Size = new System.Drawing.Size(75, 25);
             this.adicionar_refeicaoButton.TabIndex = 19;
@@ -671,6 +675,22 @@
             this.refeicao_alimento_datagrid.RowTemplate.Height = 25;
             this.refeicao_alimento_datagrid.Size = new System.Drawing.Size(1119, 463);
             this.refeicao_alimento_datagrid.TabIndex = 0;
+            // 
+            // medida_textbox
+            // 
+            this.medida_textbox.Location = new System.Drawing.Point(265, 33);
+            this.medida_textbox.Name = "medida_textbox";
+            this.medida_textbox.Size = new System.Drawing.Size(118, 23);
+            this.medida_textbox.TabIndex = 24;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(265, 15);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 15);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Medida";
             // 
             // addForm
             // 
@@ -760,5 +780,7 @@
         private Button button7;
         private Label dieta_label;
         private ComboBox dieta_combobox;
+        private Label label8;
+        private TextBox medida_textbox;
     }
 }

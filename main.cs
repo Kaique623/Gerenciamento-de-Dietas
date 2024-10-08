@@ -1,4 +1,5 @@
 using System.Data;
+using System.Diagnostics;
 
 namespace Gerenciamento_de_Dietas
 {
@@ -16,7 +17,15 @@ namespace Gerenciamento_de_Dietas
             InitializeComponent();
 
             // Abre a conexão com o banco de dados.
-            DataBase.connection.Open();
+            try
+            {
+                DataBase.connection.Open();
+                MessageBox.Show("Conexão Aberta!");
+            }
+            catch
+            {
+                MessageBox.Show("Erro ao abrir conexão");
+            }
 
             // Preenche o DataSet com as tabelas de dados especificadas (armazenadas na variável 'tables').
             // O segundo argumento "" representa uma possível condição ou filtro de consulta (aqui está vazio).
@@ -93,7 +102,14 @@ namespace Gerenciamento_de_Dietas
                     UserDataGrid.Columns["visualizar_alimento"].DisplayIndex = UserDataGrid.Columns.Count - 1;
 
                     // Define a posição da coluna "id" para ser a primeira.
-                    UserDataGrid.Columns["id"].DisplayIndex = 0;
+                    try
+                    {
+                        UserDataGrid.Columns["id"].DisplayIndex = 0;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Erro ao Carregar DB");
+                    }
                 }
                 catch
                 {

@@ -36,7 +36,7 @@ namespace Gerenciamento_de_Dietas
                 }
                 else if (value == "refeicao_alimento")
                 {
-                    query = "SELECT refeicao.nome AS 'refeicao', alimento.nome AS 'alimento', refeicao_alimento.quantidade FROM ";
+                    query = "SELECT refeicao.nome AS 'refeicao', alimento.nome AS 'alimento', refeicao_alimento.quantidade, refeicao_alimento.medida as 'Medida' FROM ";
                     condition = "LEFT JOIN refeicao ON refeicao.id = refeicao_alimento.id_refeicao " +
                                 "LEFT JOIN alimento ON alimento.id = refeicao_alimento.id_alimento ";
                 }
@@ -44,7 +44,13 @@ namespace Gerenciamento_de_Dietas
                 condition += startcondition;
                 data.Tables.Add();
                 adapter.SelectCommand = new MySqlCommand($"{query} {value} {condition}", connection);
-                adapter.Fill(data.Tables[tables.IndexOf(value)]);
+                try
+                {
+                    adapter.Fill(data.Tables[tables.IndexOf(value)]);
+                }
+                catch {
+                    MessageBox.Show("Erro ao Carregar DB");
+                }
                 condition = startcondition;
             }
 

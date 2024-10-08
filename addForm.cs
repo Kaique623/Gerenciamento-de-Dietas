@@ -179,12 +179,16 @@ namespace Gerenciamento_de_Dietas
             try
             {
                 // Insere um novo alimento na refeição ou atualiza a quantidade se já existir
-                DataBase.ExecuteCommand($"INSERT INTO refeicao_alimento (id_refeicao, id_alimento, quantidade) VALUE ('{id_textbox.Text}' , (SELECT alimento.id FROM alimento WHERE alimento.nome='{id_alimentoTextBox.Text}'), '{quantidadeTextBox.Text}')");
+                DataBase.ExecuteCommand($"INSERT INTO refeicao_alimento (id_refeicao, id_alimento, quantidade, medida) VALUE ('{id_textbox.Text}' , (SELECT alimento.id FROM alimento WHERE alimento.nome='{id_alimentoTextBox.Text}'), '{quantidadeTextBox.Text}', '{medida_textbox.Text}')");
             }
             catch
             {
+                if (quantidadeTextBox.Text == "")
+                {
+                    quantidadeTextBox.Text = "0";
+                }
                 // Atualiza a quantidade se o alimento já existir
-                DataBase.ExecuteCommand($"UPDATE refeicao_alimento SET quantidade = quantidade + {quantidadeTextBox.Text} WHERE id_alimento=(SELECT alimento.id FROM alimento WHERE alimento.nome='{id_alimentoTextBox.Text}')");
+                DataBase.ExecuteCommand($"UPDATE refeicao_alimento SET quantidade = quantidade + {quantidadeTextBox.Text}, medida = '{medida_textbox.Text}' WHERE id_alimento=(SELECT alimento.id FROM alimento WHERE alimento.nome='{id_alimentoTextBox.Text}')");
             }
             // Remove alimentos com quantidade menor que 1
             DataBase.ExecuteCommand("DELETE FROM refeicao_alimento WHERE quantidade < 1");
