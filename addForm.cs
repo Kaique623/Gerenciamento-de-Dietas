@@ -57,7 +57,7 @@ namespace Gerenciamento_de_Dietas
             if (nomeTextBox.Text != "" && email_TextBox.Text != "" && tipo_combobox.Text != "" && currentTable == "usuario")
             {
                 command = $"INSERT INTO usuario (nome, email, tipo, dieta) VALUES ('{nomeTextBox.Text}', '{email_TextBox.Text}', '{tipo_combobox.Text}', (SELECT id FROM dieta WHERE nome = '{dieta_combobox.Text}'))";
-                editcommand = $"UPDATE usuario SET nome='{nomeTextBox.Text}', email='{email_TextBox.Text}', tipo='{tipo_combobox.Text}' WHERE id='{id}'";
+                editcommand = $"UPDATE usuario SET nome='{nomeTextBox.Text}', email='{email_TextBox.Text}', tipo='{tipo_combobox.Text}', dieta=(SELECT id FROM dieta WHERE nome = '{dieta_combobox.Text}') WHERE id='{id}'";
             }
             else if (currentTable == "alimento" && nomeAlimentoTextBox.Text != "" && caloriasTextBox.Text != "" && proteinasTextBox.Text != "" && carboidratosTextBox.Text != "" && gordurasTextBox.Text != "")
             {
@@ -131,7 +131,7 @@ namespace Gerenciamento_de_Dietas
             else
             {
                 id_label.Visible = true; // Exibe o rótulo de ID
-                id_textbox.Enabled = true; // Habilita o campo ID
+                id_textbox.Enabled = false; // Habilita o campo ID
                 id_textbox.Visible = true; // Exibe o campo ID
             }
 
@@ -171,6 +171,11 @@ namespace Gerenciamento_de_Dietas
                 horarioTextBox.Text = entry2;
                 idDietaTextBox.Text = entry3;
                 AddTabControl.SelectedIndex = 3; // Seleciona a aba correspondente
+            }
+
+            if (tipo_combobox.Text == "nutrólogo")
+            {
+                dieta_combobox.Enabled = false;
             }
         }
 
@@ -255,6 +260,19 @@ namespace Gerenciamento_de_Dietas
             // Adiciona o parágrafo ao documento e fecha o documento
             document.Add(titulo);
             document.Close();
+        }
+
+        private void tipo_combobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tipo_combobox.Text == "nutrólogo")
+            {
+                dieta_combobox.Text = "";
+                dieta_combobox.Enabled = false;
+            }
+            else
+            {
+                dieta_combobox.Enabled = true;
+            }
         }
     }
 }

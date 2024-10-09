@@ -61,7 +61,16 @@ namespace Gerenciamento_de_Dietas
         {
             DataTable ds = new DataTable();
             
-            adapter.SelectCommand = new MySqlCommand($"SELECT * FROM {table} {condition}" , connection);
+            if (table == "refeicao")
+                adapter.SelectCommand = new MySqlCommand($"SELECT {table}.id as Id, {table}.nome as Nome, " +
+                    $"{table}.horario as Horario, dieta.nome as Dieta FROM {table} LEFT JOIN dieta ON dieta.id = " +
+                    $"{table}.id_dieta {condition}" , connection);
+            else if (table == "usuario")
+                adapter.SelectCommand = new MySqlCommand($"SELECT {table}.id as Id, {table}.nome as Nome, " +
+                    $"{table}.email as Email, {table}.tipo as Tipo, dieta.nome as Dieta FROM {table} LEFT JOIN dieta ON dieta.id = " +
+                    $"{table}.dieta {condition}", connection);
+            else
+                adapter.SelectCommand = new MySqlCommand($"SELECT * FROM {table} {condition}" , connection);
             adapter.Fill(ds);
 
             return ds;

@@ -73,6 +73,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.horarioTextBox = new System.Windows.Forms.TextBox();
             this.refeicao_alimentos = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.medida_textbox = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.quantidadeTextBox = new System.Windows.Forms.TextBox();
@@ -81,8 +83,6 @@
             this.id_alimentoTextBox = new System.Windows.Forms.TextBox();
             this.sairButton = new System.Windows.Forms.Button();
             this.refeicao_alimento_datagrid = new System.Windows.Forms.DataGridView();
-            this.medida_textbox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.AddTabControl.SuspendLayout();
             this.usuarioTabPage.SuspendLayout();
             this.alimentoTabPage.SuspendLayout();
@@ -177,6 +177,7 @@
             this.tipo_combobox.Name = "tipo_combobox";
             this.tipo_combobox.Size = new System.Drawing.Size(172, 33);
             this.tipo_combobox.TabIndex = 7;
+            this.tipo_combobox.SelectedIndexChanged += new System.EventHandler(this.tipo_combobox_SelectedIndexChanged);
             // 
             // id_label
             // 
@@ -593,6 +594,22 @@
             this.refeicao_alimentos.Text = "refeicao_alimento";
             this.refeicao_alimentos.UseVisualStyleBackColor = true;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(265, 15);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 15);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Medida";
+            // 
+            // medida_textbox
+            // 
+            this.medida_textbox.Location = new System.Drawing.Point(265, 33);
+            this.medida_textbox.Name = "medida_textbox";
+            this.medida_textbox.Size = new System.Drawing.Size(118, 23);
+            this.medida_textbox.TabIndex = 24;
+            // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.Gainsboro;
@@ -675,22 +692,6 @@
             this.refeicao_alimento_datagrid.RowTemplate.Height = 25;
             this.refeicao_alimento_datagrid.Size = new System.Drawing.Size(1119, 463);
             this.refeicao_alimento_datagrid.TabIndex = 0;
-            // 
-            // medida_textbox
-            // 
-            this.medida_textbox.Location = new System.Drawing.Point(265, 33);
-            this.medida_textbox.Name = "medida_textbox";
-            this.medida_textbox.Size = new System.Drawing.Size(118, 23);
-            this.medida_textbox.TabIndex = 24;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(265, 15);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 15);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "Medida";
             // 
             // addForm
             // 

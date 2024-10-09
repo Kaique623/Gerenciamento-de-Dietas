@@ -17,15 +17,8 @@ namespace Gerenciamento_de_Dietas
             InitializeComponent();
 
             // Abre a conexão com o banco de dados.
-            try
-            {
-                DataBase.connection.Open();
-                MessageBox.Show("Conexão Aberta!");
-            }
-            catch
-            {
-                MessageBox.Show("Erro ao abrir conexão");
-            }
+            DataBase.connection.Open();
+            MessageBox.Show("Conexão Aberta!");
 
             // Preenche o DataSet com as tabelas de dados especificadas (armazenadas na variável 'tables').
             // O segundo argumento "" representa uma possível condição ou filtro de consulta (aqui está vazio).
@@ -33,6 +26,17 @@ namespace Gerenciamento_de_Dietas
 
             // Define a fonte de dados do DataGrid como a primeira tabela do DataSet.
             UserDataGrid.DataSource = data.Tables[0];
+            fillFilter();
+        }
+
+        private void fillFilter()
+        {
+            filter_combobox.Text = "Filtro";
+            filter_combobox.Items.Clear();
+            foreach (DataGridViewColumn column in UserDataGrid.Columns)
+            {
+                filter_combobox.Items.Add(column.HeaderText);
+            }
         }
 
         private void TabButtonClick(object sender, EventArgs e)
@@ -117,25 +121,23 @@ namespace Gerenciamento_de_Dietas
                     Console.WriteLine("Erro ao adicionar Coluna (Já Existente)");
                 }
             }
+            fillFilter();
         }
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            string columnsConditional = "WHERE ";
+            string columnName = filter_combobox.Text;
+            string searchTextAux = SearchText.Text;
 
-            // Gera as condições de pesquisa para cada coluna
-            foreach (DataGridViewColumn column in UserDataGrid.Columns)
+            if (columnName == "Dieta")
             {
-                if (columnsConditional == "WHERE ")
-                    // Primeira condição de pesquisa
-                    columnsConditional += $"{column.Name} LIKE '%{SearchText.Text}%'";
-                else
-                    // Condição OR para as colunas seguintes
-                    columnsConditional += $" OR {column.Name} LIKE '%{SearchText.Text}%'";
+                columnName = "dieta.nome";
             }
+                
 
             // Atualiza o DataGrid com os resultados da busca
-            UserDataGrid.DataSource = DataBase.SearchContent(current_table, columnsConditional);
+            MessageBox.Show(columnName);
+            UserDataGrid.DataSource = DataBase.SearchContent(current_table, $"WHERE {columnName} LIKE '%{SearchText.Text}%'");
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -148,11 +150,7 @@ namespace Gerenciamento_de_Dietas
             this.TopLevel = true;
 
             // Adiciona o formulário de adição ao painel secundário
-            MainSplitScreen.Panel2.Controls.Add(addScreen);
-
-            // Desabilita e oculta o UserDataGrid
-            UserDataGrid.Visible = false;
-            UserDataGrid.Enabled = false;
+            InformationContainer.Panel2.Controls.Add(addScreen);
 
             // Registra o evento para quando o formulário de adição for fechado
             addScreen.addFormClosed += addFormClosed;
@@ -163,8 +161,7 @@ namespace Gerenciamento_de_Dietas
             // Inicializa a tela de adição
             addScreen.startup();
 
-            // Colapsa o painel principal (cabeçalho ou dashboard)
-            MainSplitScreen.Panel1Collapsed = true;
+            CollapsePanels();
 
             // Exibe o formulário de adição
             addScreen.Show();
@@ -183,6 +180,7 @@ namespace Gerenciamento_de_Dietas
             UserDataGrid.Enabled = true;
 
             // Reexpande o painel principal (cabeçalho ou dashboard)
+            InformationContainer.Panel1Collapsed = false;
             MainSplitScreen.Panel1Collapsed = false;
         }
 
@@ -208,11 +206,10 @@ namespace Gerenciamento_de_Dietas
                     addScreen.entry3 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[3].Value);
 
                 // Se a tabela atual for "alimento", coleta valores extras
-                if (current_table == "alimento")
-                {
+                if (current_table == "alimento" || current_table == "usuario")
                     addScreen.entry4 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[4].Value);
+                if (current_table == "alimento")
                     addScreen.entry5 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[5].Value);
-                }
 
                 // Define a tabela atual no formulário de edição
                 addScreen.currentTable = current_table;
@@ -222,17 +219,12 @@ namespace Gerenciamento_de_Dietas
                 this.TopLevel = true;
 
                 // Adiciona o formulário de edição ao painel secundário
-                MainSplitScreen.Panel2.Controls.Add(addScreen);
-
-                // Desabilita o UserDataGrid durante a edição
-                UserDataGrid.Visible = false;
-                UserDataGrid.Enabled = false;
+                InformationContainer.Panel2.Controls.Add(addScreen);
 
                 // Registra o evento para restaurar a interface após fechar o formulário de edição
                 addScreen.addFormClosed += addFormClosed;
 
-                // Colapsa o painel principal (cabeçalho ou dashboard) durante a edição
-                MainSplitScreen.Panel1Collapsed = true;
+                CollapsePanels();
 
                 // Inicializa o formulário de edição
                 addScreen.startup();
@@ -302,18 +294,11 @@ namespace Gerenciamento_de_Dietas
                 // Configura o formulário para ser adicionado ao painel secundário
                 addScreen.TopLevel = false;
 
-                // Desabilita e oculta o UserDataGrid durante a edição
-                UserDataGrid.Visible = false;
-                UserDataGrid.Enabled = false;
-
                 // Adiciona o formulário de adição ao painel secundário
-                MainSplitScreen.Panel2.Controls.Add(addScreen);
+                InformationContainer.Panel2.Controls.Add(addScreen);
 
                 // Define a tabela atual no formulário de adição
                 addScreen.currentTable = current_table;
-
-                // Colapsa o painel principal para melhor visualização
-                MainSplitScreen.Panel1Collapsed = true;
 
                 // Define a propriedade Alimentos como verdadeira
                 addScreen.Alimentos = true;
@@ -327,6 +312,17 @@ namespace Gerenciamento_de_Dietas
                 // Exibe o formulário de adição
                 addScreen.Show();
             }
+        }
+
+        private void CollapsePanels()
+        {
+            // Desabilita e oculta o UserDataGrid durante a edição
+            UserDataGrid.Visible = false;
+            UserDataGrid.Enabled = false;
+
+            // Colapsa o painel principal para melhor visualização
+            InformationContainer.Panel1Collapsed = true;
+            MainSplitScreen.Panel1Collapsed = true;
         }
     }
 }
