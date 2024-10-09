@@ -34,7 +34,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.email_TextBox = new System.Windows.Forms.TextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.label3 = new System.Windows.Forms.Label();
             this.tipo_combobox = new System.Windows.Forms.ComboBox();
             this.id_label = new System.Windows.Forms.Label();
@@ -734,7 +733,6 @@
         private Label label1;
         private Label label2;
         private TextBox email_TextBox;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Label label3;
         private ComboBox tipo_combobox;
         private Label id_label;

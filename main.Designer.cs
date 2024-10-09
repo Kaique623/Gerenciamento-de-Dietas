@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainSplitScreen = new System.Windows.Forms.SplitContainer();
             this.filter_combobox = new System.Windows.Forms.ComboBox();
             this.refeicoesTabButton = new System.Windows.Forms.Button();
@@ -37,21 +36,20 @@
             this.AlimentosButton = new System.Windows.Forms.Button();
             this.DietaTabButton = new System.Windows.Forms.Button();
             this.UsuariosTabButton = new System.Windows.Forms.Button();
-            this.InformationContainer = new System.Windows.Forms.SplitContainer();
-            this.addButton = new System.Windows.Forms.Button();
-            this.removeButton = new System.Windows.Forms.Button();
-            this.EditButton = new System.Windows.Forms.Button();
-            this.RecarregarPagina = new System.Windows.Forms.Button();
-            this.UserDataGrid = new System.Windows.Forms.DataGridView();
+            this.customPanel1 = new Gerenciamento_de_Dietas.CustomPanel();
+            this.alturaTemplateLabel = new System.Windows.Forms.Label();
+            this.idadeTemplateLabel = new System.Windows.Forms.Label();
+            this.TemplateGeneroLabel = new System.Windows.Forms.Label();
+            this.templateDietaLabel = new System.Windows.Forms.Label();
+            this.tipoLabelTemplate = new System.Windows.Forms.Label();
+            this.idLabelTemplate = new System.Windows.Forms.Label();
+            this.templateLabelUsuario = new System.Windows.Forms.Label();
+            this.pesoTemplateLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitScreen)).BeginInit();
             this.MainSplitScreen.Panel1.SuspendLayout();
             this.MainSplitScreen.Panel2.SuspendLayout();
             this.MainSplitScreen.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InformationContainer)).BeginInit();
-            this.InformationContainer.Panel1.SuspendLayout();
-            this.InformationContainer.Panel2.SuspendLayout();
-            this.InformationContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UserDataGrid)).BeginInit();
+            this.customPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainSplitScreen
@@ -75,10 +73,10 @@
             // 
             // MainSplitScreen.Panel2
             // 
-            this.MainSplitScreen.Panel2.BackColor = System.Drawing.Color.White;
-            this.MainSplitScreen.Panel2.Controls.Add(this.InformationContainer);
+            this.MainSplitScreen.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.MainSplitScreen.Panel2.Controls.Add(this.customPanel1);
             this.MainSplitScreen.Size = new System.Drawing.Size(1148, 684);
-            this.MainSplitScreen.SplitterDistance = 40;
+            this.MainSplitScreen.SplitterDistance = 70;
             this.MainSplitScreen.SplitterWidth = 1;
             this.MainSplitScreen.TabIndex = 0;
             // 
@@ -86,7 +84,7 @@
             // 
             this.filter_combobox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.filter_combobox.FormattingEnabled = true;
-            this.filter_combobox.Location = new System.Drawing.Point(368, 6);
+            this.filter_combobox.Location = new System.Drawing.Point(368, 19);
             this.filter_combobox.Name = "filter_combobox";
             this.filter_combobox.Size = new System.Drawing.Size(96, 29);
             this.filter_combobox.TabIndex = 10;
@@ -96,7 +94,7 @@
             // 
             this.refeicoesTabButton.BackColor = System.Drawing.Color.White;
             this.refeicoesTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.refeicoesTabButton.Location = new System.Drawing.Point(963, 5);
+            this.refeicoesTabButton.Location = new System.Drawing.Point(963, 18);
             this.refeicoesTabButton.Name = "refeicoesTabButton";
             this.refeicoesTabButton.Size = new System.Drawing.Size(78, 31);
             this.refeicoesTabButton.TabIndex = 9;
@@ -106,7 +104,7 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(465, 5);
+            this.searchButton.Location = new System.Drawing.Point(465, 18);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(33, 31);
             this.searchButton.TabIndex = 4;
@@ -117,7 +115,7 @@
             // SearchText
             // 
             this.SearchText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SearchText.Location = new System.Drawing.Point(20, 6);
+            this.SearchText.Location = new System.Drawing.Point(20, 19);
             this.SearchText.Name = "SearchText";
             this.SearchText.Size = new System.Drawing.Size(345, 29);
             this.SearchText.TabIndex = 3;
@@ -126,7 +124,7 @@
             // 
             this.AlimentosButton.BackColor = System.Drawing.Color.White;
             this.AlimentosButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AlimentosButton.Location = new System.Drawing.Point(879, 5);
+            this.AlimentosButton.Location = new System.Drawing.Point(879, 18);
             this.AlimentosButton.Name = "AlimentosButton";
             this.AlimentosButton.Size = new System.Drawing.Size(78, 31);
             this.AlimentosButton.TabIndex = 2;
@@ -138,7 +136,7 @@
             // 
             this.DietaTabButton.BackColor = System.Drawing.Color.White;
             this.DietaTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DietaTabButton.Location = new System.Drawing.Point(1047, 5);
+            this.DietaTabButton.Location = new System.Drawing.Point(1047, 18);
             this.DietaTabButton.Name = "DietaTabButton";
             this.DietaTabButton.Size = new System.Drawing.Size(78, 31);
             this.DietaTabButton.TabIndex = 1;
@@ -150,7 +148,7 @@
             // 
             this.UsuariosTabButton.BackColor = System.Drawing.Color.White;
             this.UsuariosTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UsuariosTabButton.Location = new System.Drawing.Point(795, 5);
+            this.UsuariosTabButton.Location = new System.Drawing.Point(795, 18);
             this.UsuariosTabButton.Name = "UsuariosTabButton";
             this.UsuariosTabButton.Size = new System.Drawing.Size(78, 30);
             this.UsuariosTabButton.TabIndex = 0;
@@ -158,102 +156,101 @@
             this.UsuariosTabButton.UseVisualStyleBackColor = false;
             this.UsuariosTabButton.Click += new System.EventHandler(this.TabButtonClick);
             // 
-            // InformationContainer
+            // customPanel1
             // 
-            this.InformationContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InformationContainer.Location = new System.Drawing.Point(0, 0);
-            this.InformationContainer.Name = "InformationContainer";
-            this.InformationContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.customPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.customPanel1.Controls.Add(this.pesoTemplateLabel);
+            this.customPanel1.Controls.Add(this.alturaTemplateLabel);
+            this.customPanel1.Controls.Add(this.idadeTemplateLabel);
+            this.customPanel1.Controls.Add(this.TemplateGeneroLabel);
+            this.customPanel1.Controls.Add(this.templateDietaLabel);
+            this.customPanel1.Controls.Add(this.tipoLabelTemplate);
+            this.customPanel1.Controls.Add(this.idLabelTemplate);
+            this.customPanel1.Controls.Add(this.templateLabelUsuario);
+            this.customPanel1.Location = new System.Drawing.Point(3, 24);
+            this.customPanel1.Name = "customPanel1";
+            this.customPanel1.Size = new System.Drawing.Size(292, 214);
+            this.customPanel1.TabIndex = 0;
             // 
-            // InformationContainer.Panel1
+            // alturaTemplateLabel
             // 
-            this.InformationContainer.Panel1.Controls.Add(this.addButton);
-            this.InformationContainer.Panel1.Controls.Add(this.removeButton);
-            this.InformationContainer.Panel1.Controls.Add(this.EditButton);
-            this.InformationContainer.Panel1.Controls.Add(this.RecarregarPagina);
+            this.alturaTemplateLabel.AutoSize = true;
+            this.alturaTemplateLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.alturaTemplateLabel.Location = new System.Drawing.Point(153, 55);
+            this.alturaTemplateLabel.Name = "alturaTemplateLabel";
+            this.alturaTemplateLabel.Size = new System.Drawing.Size(42, 15);
+            this.alturaTemplateLabel.TabIndex = 8;
+            this.alturaTemplateLabel.Text = "Altura:";
             // 
-            // InformationContainer.Panel2
+            // idadeTemplateLabel
             // 
-            this.InformationContainer.Panel2.Controls.Add(this.UserDataGrid);
-            this.InformationContainer.Size = new System.Drawing.Size(1148, 643);
-            this.InformationContainer.SplitterDistance = 60;
-            this.InformationContainer.TabIndex = 9;
+            this.idadeTemplateLabel.AutoSize = true;
+            this.idadeTemplateLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.idadeTemplateLabel.Location = new System.Drawing.Point(153, 30);
+            this.idadeTemplateLabel.Name = "idadeTemplateLabel";
+            this.idadeTemplateLabel.Size = new System.Drawing.Size(39, 15);
+            this.idadeTemplateLabel.TabIndex = 7;
+            this.idadeTemplateLabel.Text = "Idade:";
             // 
-            // addButton
+            // TemplateGeneroLabel
             // 
-            this.addButton.BackColor = System.Drawing.Color.White;
-            this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addButton.Location = new System.Drawing.Point(20, 0);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(96, 41);
-            this.addButton.TabIndex = 9;
-            this.addButton.Text = "Adicionar";
-            this.addButton.UseVisualStyleBackColor = false;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.TemplateGeneroLabel.AutoSize = true;
+            this.TemplateGeneroLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.TemplateGeneroLabel.Location = new System.Drawing.Point(23, 130);
+            this.TemplateGeneroLabel.Name = "TemplateGeneroLabel";
+            this.TemplateGeneroLabel.Size = new System.Drawing.Size(48, 15);
+            this.TemplateGeneroLabel.TabIndex = 6;
+            this.TemplateGeneroLabel.Text = "Gênero:";
             // 
-            // removeButton
+            // templateDietaLabel
             // 
-            this.removeButton.BackColor = System.Drawing.Color.White;
-            this.removeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.removeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.removeButton.Location = new System.Drawing.Point(252, 0);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(96, 41);
-            this.removeButton.TabIndex = 12;
-            this.removeButton.Text = "Remover";
-            this.removeButton.UseVisualStyleBackColor = false;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
+            this.templateDietaLabel.AutoSize = true;
+            this.templateDietaLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.templateDietaLabel.Location = new System.Drawing.Point(23, 105);
+            this.templateDietaLabel.Name = "templateDietaLabel";
+            this.templateDietaLabel.Size = new System.Drawing.Size(37, 15);
+            this.templateDietaLabel.TabIndex = 5;
+            this.templateDietaLabel.Text = "Dieta:";
             // 
-            // EditButton
+            // tipoLabelTemplate
             // 
-            this.EditButton.BackColor = System.Drawing.Color.White;
-            this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.EditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditButton.Location = new System.Drawing.Point(136, 0);
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(96, 41);
-            this.EditButton.TabIndex = 10;
-            this.EditButton.Text = "Editar";
-            this.EditButton.UseVisualStyleBackColor = false;
-            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            this.tipoLabelTemplate.AutoSize = true;
+            this.tipoLabelTemplate.BackColor = System.Drawing.Color.White;
+            this.tipoLabelTemplate.Location = new System.Drawing.Point(23, 80);
+            this.tipoLabelTemplate.Name = "tipoLabelTemplate";
+            this.tipoLabelTemplate.Size = new System.Drawing.Size(36, 15);
+            this.tipoLabelTemplate.TabIndex = 4;
+            this.tipoLabelTemplate.Text = "Tipo: ";
             // 
-            // RecarregarPagina
+            // idLabelTemplate
             // 
-            this.RecarregarPagina.BackColor = System.Drawing.Color.White;
-            this.RecarregarPagina.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.RecarregarPagina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RecarregarPagina.Location = new System.Drawing.Point(368, 0);
-            this.RecarregarPagina.Name = "RecarregarPagina";
-            this.RecarregarPagina.Size = new System.Drawing.Size(96, 41);
-            this.RecarregarPagina.TabIndex = 11;
-            this.RecarregarPagina.Text = "Recarregar Dados";
-            this.RecarregarPagina.UseVisualStyleBackColor = false;
-            this.RecarregarPagina.Click += new System.EventHandler(this.RecarregarPagina_Click);
+            this.idLabelTemplate.AutoSize = true;
+            this.idLabelTemplate.BackColor = System.Drawing.SystemColors.Window;
+            this.idLabelTemplate.Location = new System.Drawing.Point(23, 30);
+            this.idLabelTemplate.Name = "idLabelTemplate";
+            this.idLabelTemplate.Size = new System.Drawing.Size(24, 15);
+            this.idLabelTemplate.TabIndex = 3;
+            this.idLabelTemplate.Text = "ID: ";
             // 
-            // UserDataGrid
+            // templateLabelUsuario
             // 
-            this.UserDataGrid.AllowUserToAddRows = false;
-            this.UserDataGrid.AllowUserToDeleteRows = false;
-            this.UserDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.UserDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.UserDataGrid.BackgroundColor = System.Drawing.Color.White;
-            this.UserDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical;
-            this.UserDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.UserDataGrid.DefaultCellStyle = dataGridViewCellStyle1;
-            this.UserDataGrid.Location = new System.Drawing.Point(20, 3);
-            this.UserDataGrid.Name = "UserDataGrid";
-            this.UserDataGrid.ReadOnly = true;
-            this.UserDataGrid.RowTemplate.Height = 25;
-            this.UserDataGrid.Size = new System.Drawing.Size(1105, 574);
-            this.UserDataGrid.TabIndex = 1;
+            this.templateLabelUsuario.AutoSize = true;
+            this.templateLabelUsuario.BackColor = System.Drawing.SystemColors.Window;
+            this.templateLabelUsuario.Location = new System.Drawing.Point(23, 55);
+            this.templateLabelUsuario.Name = "templateLabelUsuario";
+            this.templateLabelUsuario.Size = new System.Drawing.Size(53, 15);
+            this.templateLabelUsuario.TabIndex = 1;
+            this.templateLabelUsuario.Text = "Usuario: ";
+            // 
+            // pesoTemplateLabel
+            // 
+            this.pesoTemplateLabel.AutoSize = true;
+            this.pesoTemplateLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.pesoTemplateLabel.Location = new System.Drawing.Point(153, 80);
+            this.pesoTemplateLabel.Name = "pesoTemplateLabel";
+            this.pesoTemplateLabel.Size = new System.Drawing.Size(60, 15);
+            this.pesoTemplateLabel.TabIndex = 9;
+            this.pesoTemplateLabel.Text = "Peso (KG):";
             // 
             // MainApp
             // 
@@ -268,11 +265,8 @@
             this.MainSplitScreen.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitScreen)).EndInit();
             this.MainSplitScreen.ResumeLayout(false);
-            this.InformationContainer.Panel1.ResumeLayout(false);
-            this.InformationContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.InformationContainer)).EndInit();
-            this.InformationContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.UserDataGrid)).EndInit();
+            this.customPanel1.ResumeLayout(false);
+            this.customPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -286,11 +280,14 @@
         public SplitContainer MainSplitScreen;
         private Button refeicoesTabButton;
         private ComboBox filter_combobox;
-        private SplitContainer InformationContainer;
-        private Button addButton;
-        private Button removeButton;
-        private Button EditButton;
-        private Button RecarregarPagina;
-        private DataGridView UserDataGrid;
+        private CustomPanel customPanel1;
+        private Label templateLabelUsuario;
+        private Label idLabelTemplate;
+        private Label tipoLabelTemplate;
+        private Label templateDietaLabel;
+        private Label TemplateGeneroLabel;
+        private Label idadeTemplateLabel;
+        private Label alturaTemplateLabel;
+        private Label pesoTemplateLabel;
     }
 }
