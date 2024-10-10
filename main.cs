@@ -184,6 +184,7 @@ namespace Gerenciamento_de_Dietas
         {
             string columnName = filter_combobox.Text;
             string searchTextAux = SearchText.Text;
+            currentPage = 0;
 
             if (columnName == "Dieta")
             {
@@ -195,8 +196,8 @@ namespace Gerenciamento_de_Dietas
                 GenerateNewUserPanel(searchData);
             else
                 MessageBox.Show("Selecione um Filtro!", "Aviso!", MessageBoxButtons.OK);
-            currentPage = 0;
-            pageLabel.Text = $"{currentPage}/{(data.Tables[0].Rows.Count / 8).ToString()}";
+
+            pageLabel.Text = $"{currentPage}/{(searchData.Rows.Count / 8).ToString()}";
 
             searching = true;
             
