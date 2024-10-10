@@ -1,4 +1,4 @@
-using System.Data;
+Ôªøusing System.Data;
 using System.Diagnostics;
 
 namespace Gerenciamento_de_Dietas
@@ -6,106 +6,162 @@ namespace Gerenciamento_de_Dietas
     public partial class MainApp : Form
     {   
         List<string> tables = new List<string>() {"usuario", "dieta", "alimento","refeicao", "refeicao_alimento"};
+        Dictionary<int, InformationFrame> InfoPanels = new Dictionary<int, InformationFrame>();
 
         string current_table = "usuario";
         DataGridViewButtonColumn visualizar_alimento = new System.Windows.Forms.DataGridViewButtonColumn();
 
         DataSet data = new DataSet();
 
+        DataTable searchData = new DataTable();
+        bool searching = false;
+
+        public int currentPage = 0;
+
         public MainApp()
         {
             InitializeComponent();
 
-            // Abre a conex„o com o banco de dados.
+            // Abre a conex√£o com o banco de dados.
             DataBase.connection.Open();
-            MessageBox.Show("Conex„o Aberta!");
 
-            // Preenche o DataSet com as tabelas de dados especificadas (armazenadas na vari·vel 'tables').
-            // O segundo argumento "" representa uma possÌvel condiÁ„o ou filtro de consulta (aqui est· vazio).
+            // Preenche o DataSet com as tabelas de dados especificadas (armazenadas na vari√°vel 'tables').
             data = DataBase.FillDataSet(tables, "");
 
-            // Define a fonte de dados do DataGrid como a primeira tabela do DataSet.
-          //  UserDataGrid.DataSource = data.Tables[0];
+            pageLabel.Text = $"{currentPage}/{(data.Tables[0].Rows.Count/8).ToString()}";
+            GenerateNewUserPanel(data.Tables[0]);
             fillFilter();
         }
 
         private void fillFilter()
         {
-          /*  filter_combobox.Text = "Filtro";
+            filter_combobox.Text = "Filtro";
             filter_combobox.Items.Clear();
-            foreach (DataGridViewColumn column in UserDataGrid.Columns)
+         
+            foreach (DataColumn column in data.Tables[tables.IndexOf(current_table)].Columns)
             {
-                filter_combobox.Items.Add(column.HeaderText);
-            } */
+                filter_combobox.Items.Add(column.ColumnName);
+            }
+            filter_combobox.Items.Add("Filtro");
+        }
+
+        private async void GenerateNewUserPanel(DataTable table)
+        {
+            if (InfoPanels.Count > 0)
+            {
+                foreach (var i in InfoPanels.Keys)
+                {
+                    MainSplitScreen.Panel2.Controls.Remove(InfoPanels[i].mainPanel);
+                }
+            }
+
+            InfoPanels.Clear();
+            int currentFrame = 0;
+            
+            foreach (int value in Enumerable.Range(0 + (8 * currentPage), 9 + (8*currentPage)))
+            {
+                if (value == data.Tables[0].Rows.Count)
+                    break;
+
+                int xpos = 3 + (288 * currentFrame);
+
+                if (currentFrame > 3)
+                    xpos = 3 + (288 * (currentFrame - 4));
+
+                int ypos = 24;
+
+                if (currentFrame > 3)
+                    ypos = ypos + 214;
+
+                Dictionary<string, string> auxlist = new Dictionary<string, string>();
+
+                for (int i = 0; i < 8; i++)
+                {
+                    try
+                    {
+                        auxlist[table.Columns[i].ColumnName] = Convert.ToString(table.Rows[value][i]);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Pesquisa aa");
+                    }
+                }
+
+                InfoPanels[currentFrame] = new InformationFrame();
+                await Task.Run( () => InfoPanels[currentFrame].userMain(auxlist, xpos, ypos));
+
+                MainSplitScreen.Panel2.Controls.Add(InfoPanels[currentFrame].mainPanel);
+                currentFrame++;
+            }
         }
 
         private void TabButtonClick(object sender, EventArgs e)
         {
          /*   try
             {
-                // Tenta remover a coluna "visualizar_alimento" do DataGrid caso ela j· exista.
+                // Tenta remover a coluna "visualizar_alimento" do DataGrid caso ela j√° exista.
                 UserDataGrid.Columns.Remove(visualizar_alimento);
             }
             catch
             {
-                // Caso a coluna "visualizar_alimento" n„o exista, exibe uma mensagem no console.
+                // Caso a coluna "visualizar_alimento" n√£o exista, exibe uma mensagem no console.
                 Console.WriteLine("Coluna Inexistente");
             }
 
             // Permite que o DataGrid gere as colunas automaticamente com base no DataSource.
             UserDataGrid.AutoGenerateColumns = true;
 
-            // ObtÈm o texto do bot„o que disparou o evento.
+            // Obt√©m o texto do bot√£o que disparou o evento.
             string buttonText = ((Button)sender).Text;
 
-            // Muda o DataGrid para a tabela de "Usu·rios" se o bot„o clicado for "Usu·rios".
-            if (buttonText == "Usu·rios")
+            // Muda o DataGrid para a tabela de "Usu√°rios" se o bot√£o clicado for "Usu√°rios".
+            if (buttonText == "Usu√°rios")
             {
-                // Define a tabela atual como "usuario" e atualiza o DataSource com os dados de usu·rios.
+                // Define a tabela atual como "usuario" e atualiza o DataSource com os dados de usu√°rios.
                 current_table = "usuario";
                 UserDataGrid.DataSource = data.Tables[0];
             }
-            // Muda o DataGrid para a tabela de "Dietas" se o bot„o clicado for "Dietas".
+            // Muda o DataGrid para a tabela de "Dietas" se o bot√£o clicado for "Dietas".
             else if (buttonText == "Dietas")
             {
                 // Define a tabela atual como "dieta" e atualiza o DataSource com os dados de dietas.
                 current_table = "dieta";
                 UserDataGrid.DataSource = data.Tables[1];
             }
-            // Muda o DataGrid para a tabela de "Alimentos" se o bot„o clicado for "Alimentos".
+            // Muda o DataGrid para a tabela de "Alimentos" se o bot√£o clicado for "Alimentos".
             else if (buttonText == "Alimentos")
             {
                 // Define a tabela atual como "alimento" e atualiza o DataSource com os dados de alimentos.
                 current_table = "alimento";
                 UserDataGrid.DataSource = data.Tables[2];
             }
-            // Muda o DataGrid para a tabela de "RefeiÁıes" se o bot„o clicado for "RefeiÁıes".
-            else if (buttonText == "RefeiÁıes")
+            // Muda o DataGrid para a tabela de "Refei√ß√µes" se o bot√£o clicado for "Refei√ß√µes".
+            else if (buttonText == "Refei√ß√µes")
             {
-                // Define a tabela atual como "refeicao" e atualiza o DataSource com os dados de refeiÁıes.
+                // Define a tabela atual como "refeicao" e atualiza o DataSource com os dados de refei√ß√µes.
                 current_table = "refeicao";
                 UserDataGrid.DataSource = data.Tables[3];
 
                 try
                 {
-                    // Desativa a geraÁ„o autom·tica de colunas para personalizar as colunas manualmente.
+                    // Desativa a gera√ß√£o autom√°tica de colunas para personalizar as colunas manualmente.
                     UserDataGrid.AutoGenerateColumns = false;
 
-                    // Configura a coluna "visualizar_alimento" como um bot„o.
-                    visualizar_alimento.HeaderText = "";  // O cabeÁalho da coluna ser· vazio.
+                    // Configura a coluna "visualizar_alimento" como um bot√£o.
+                    visualizar_alimento.HeaderText = "";  // O cabe√ßalho da coluna ser√° vazio.
                     visualizar_alimento.Name = "visualizar_alimento";  // Nome da coluna.
                     visualizar_alimento.ReadOnly = true;  // Define a coluna como somente leitura.
-                    visualizar_alimento.Visible = true;  // Torna a coluna visÌvel.
-                    visualizar_alimento.Text = "Visualizar Alimentos";  // Texto exibido no bot„o.
-                    visualizar_alimento.UseColumnTextForButtonValue = true;  // Define o texto do bot„o.
+                    visualizar_alimento.Visible = true;  // Torna a coluna vis√≠vel.
+                    visualizar_alimento.Text = "Visualizar Alimentos";  // Texto exibido no bot√£o.
+                    visualizar_alimento.UseColumnTextForButtonValue = true;  // Define o texto do bot√£o.
 
-                    // Adiciona a coluna de bot„o "visualizar_alimento" ao DataGrid.
+                    // Adiciona a coluna de bot√£o "visualizar_alimento" ao DataGrid.
                     UserDataGrid.Columns.Add(visualizar_alimento);
 
-                    // Define a posiÁ„o da coluna "visualizar_alimento" para ser a ˙ltima.
+                    // Define a posi√ß√£o da coluna "visualizar_alimento" para ser a √∫ltima.
                     UserDataGrid.Columns["visualizar_alimento"].DisplayIndex = UserDataGrid.Columns.Count - 1;
 
-                    // Define a posiÁ„o da coluna "id" para ser a primeira.
+                    // Define a posi√ß√£o da coluna "id" para ser a primeira.
                     try
                     {
                         UserDataGrid.Columns["id"].DisplayIndex = 0;
@@ -117,8 +173,8 @@ namespace Gerenciamento_de_Dietas
                 }
                 catch
                 {
-                    // Caso j· exista uma coluna com o nome "visualizar_alimento", exibe uma mensagem no console.
-                    Console.WriteLine("Erro ao adicionar Coluna (J· Existente)");
+                    // Caso j√° exista uma coluna com o nome "visualizar_alimento", exibe uma mensagem no console.
+                    Console.WriteLine("Erro ao adicionar Coluna (J√° Existente)");
                 }
             }
             fillFilter(); */
@@ -133,37 +189,43 @@ namespace Gerenciamento_de_Dietas
             {
                 columnName = "dieta.nome";
             }
-                
+            searchData = DataBase.SearchContent(current_table, $"WHERE {current_table}.{columnName} LIKE '%{SearchText.Text}%'");
+            
+            if (columnName != "Filtro")
+                GenerateNewUserPanel(searchData);
+            else
+                MessageBox.Show("Selecione um Filtro!", "Aviso!", MessageBoxButtons.OK);
+            currentPage = 0;
+            pageLabel.Text = $"{currentPage}/{(data.Tables[0].Rows.Count / 8).ToString()}";
 
-            // Atualiza o DataGrid com os resultados da busca
-            MessageBox.Show(columnName);
-         //   UserDataGrid.DataSource = DataBase.SearchContent(current_table, $"WHERE {columnName} LIKE '%{SearchText.Text}%'");
+            searching = true;
+            
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-        /*    // CriaÁ„o da tela de adiÁ„o
+        /*    // Cria√ß√£o da tela de adi√ß√£o
             addForm addScreen = new addForm();
 
-            // ConfiguraÁ„o de hierarquia dos formul·rios
+            // Configura√ß√£o de hierarquia dos formul√°rios
             addScreen.TopLevel = false;
             this.TopLevel = true;
 
-            // Adiciona o formul·rio de adiÁ„o ao painel secund·rio
+            // Adiciona o formul√°rio de adi√ß√£o ao painel secund√°rio
             InformationContainer.Panel2.Controls.Add(addScreen);
 
-            // Registra o evento para quando o formul·rio de adiÁ„o for fechado
+            // Registra o evento para quando o formul√°rio de adi√ß√£o for fechado
             addScreen.addFormClosed += addFormClosed;
 
-            // Define a tabela atual no formul·rio de adiÁ„o
+            // Define a tabela atual no formul√°rio de adi√ß√£o
             addScreen.currentTable = current_table;
 
-            // Inicializa a tela de adiÁ„o
+            // Inicializa a tela de adi√ß√£o
             addScreen.startup();
 
             CollapsePanels();
 
-            // Exibe o formul·rio de adiÁ„o
+            // Exibe o formul√°rio de adi√ß√£o
             addScreen.Show(); */
         }
 
@@ -175,18 +237,18 @@ namespace Gerenciamento_de_Dietas
             // Define a fonte de dados do UserDataGrid para a tabela atualizada
             UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
 
-            // Torna o UserDataGrid visÌvel e habilitado novamente
+            // Torna o UserDataGrid vis√≠vel e habilitado novamente
             UserDataGrid.Visible = true;
             UserDataGrid.Enabled = true;
 
-            // Reexpande o painel principal (cabeÁalho ou dashboard)
+            // Reexpande o painel principal (cabe√ßalho ou dashboard)
             InformationContainer.Panel1Collapsed = false;
             MainSplitScreen.Panel1Collapsed = false; */
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            // Cria uma nova tela de adiÁ„o no modo de ediÁ„o
+            // Cria uma nova tela de adi√ß√£o no modo de edi√ß√£o
             addForm addScreen = new addForm();
             addScreen.editMode = true;
 
@@ -195,14 +257,14 @@ namespace Gerenciamento_de_Dietas
                 /*
                 // Coleta os dados da linha selecionada no UserDataGrid
 
-                // Coleta o valor da primeira cÈlula (ID)
+                // Coleta o valor da primeira c√©lula (ID)
                 addScreen.id = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[0].Value);
 
-                // Coleta o valor da segunda e terceira cÈlula (campos de entrada)
+                // Coleta o valor da segunda e terceira c√©lula (campos de entrada)
                 addScreen.entry1 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[1].Value);
                 addScreen.entry2 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[2].Value);
 
-                // Se a tabela atual n„o for "dieta", coleta o valor da terceira entrada
+                // Se a tabela atual n√£o for "dieta", coleta o valor da terceira entrada
                 if (current_table != "dieta")
                     addScreen.entry3 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[3].Value);
 
@@ -212,25 +274,25 @@ namespace Gerenciamento_de_Dietas
                 if (current_table == "alimento")
                     addScreen.entry5 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[5].Value); */
 
-                // Define a tabela atual no formul·rio de ediÁ„o
+                // Define a tabela atual no formul√°rio de edi√ß√£o
                 addScreen.currentTable = current_table;
 
-                // Configura a tela de ediÁ„o
+                // Configura a tela de edi√ß√£o
                 addScreen.TopLevel = false;
                 this.TopLevel = true;
 
-                // Adiciona o formul·rio de ediÁ„o ao painel secund·rio
+                // Adiciona o formul√°rio de edi√ß√£o ao painel secund√°rio
                // InformationContainer.Panel2.Controls.Add(addScreen);
 
-                // Registra o evento para restaurar a interface apÛs fechar o formul·rio de ediÁ„o
+                // Registra o evento para restaurar a interface ap√≥s fechar o formul√°rio de edi√ß√£o
                 addScreen.addFormClosed += addFormClosed;
 
                 CollapsePanels();
 
-                // Inicializa o formul·rio de ediÁ„o
+                // Inicializa o formul√°rio de edi√ß√£o
                 addScreen.startup();
 
-                // Exibe o formul·rio de ediÁ„o
+                // Exibe o formul√°rio de edi√ß√£o
                 addScreen.Show();
             }
             catch
@@ -242,10 +304,10 @@ namespace Gerenciamento_de_Dietas
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            /* Verifica se nenhuma linha est· selecionada
+            /* Verifica se nenhuma linha est√° selecionada
         //    if (UserDataGrid.SelectedRows.Count == 0)
           //  {
-                // Exibe uma mensagem de alerta ao usu·rio
+                // Exibe uma mensagem de alerta ao usu√°rio
                 MessageBox.Show("Nenhuma Fileira Selecionada!");
          //   }
             else
@@ -253,10 +315,10 @@ namespace Gerenciamento_de_Dietas
                 // Itera sobre as linhas selecionadas
                 foreach (DataGridViewRow row in UserDataGrid.SelectedRows)
                 {
-                    // Confirma a remoÁ„o do item
-                    if (MessageBox.Show($"Deseja Remover: {row.Cells[1].Value} ?", "ConfirmaÁ„o", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    // Confirma a remo√ß√£o do item
+                    if (MessageBox.Show($"Deseja Remover: {row.Cells[1].Value} ?", "Confirma√ß√£o", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        // Executa o comando SQL para remover o usu·rio selecionado da tabela
+                        // Executa o comando SQL para remover o usu√°rio selecionado da tabela
                         DataBase.ExecuteCommand($"DELETE FROM {current_table} WHERE id='{row.Cells[0].Value}'");
 
                         // Remove a linha do UserDataGrid
@@ -277,57 +339,88 @@ namespace Gerenciamento_de_Dietas
             // Atualiza a fonte de dados do UserDataGrid com a tabela correspondente
             UserDataGrid.DataSource = data.Tables[tables.IndexOf(current_table)];
 
-            // Informa ao usu·rio que os dados foram recarregados
+            // Informa ao usu√°rio que os dados foram recarregados
             MessageBox.Show("Dados Recarregados!"); */
         }
 
         private void UserDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verifica se a tabela atual È "refeicao" e se a cÈlula clicada È um bot„o
+            // Verifica se a tabela atual √© "refeicao" e se a c√©lula clicada √© um bot√£o
       /*      if (current_table == "refeicao" && UserDataGrid.Columns[e.ColumnIndex].CellType == typeof(DataGridViewButtonCell))
             {
-                // Cria uma nova inst‚ncia do formul·rio de adiÁ„o
+                // Cria uma nova inst√¢ncia do formul√°rio de adi√ß√£o
                 addForm addScreen = new addForm();
 
-                // Coleta o ID da refeiÁ„o da linha clicada
+                // Coleta o ID da refei√ß√£o da linha clicada
                 addScreen.id = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[0].Value);
 
-                // Configura o formul·rio para ser adicionado ao painel secund·rio
+                // Configura o formul√°rio para ser adicionado ao painel secund√°rio
                 addScreen.TopLevel = false;
 
-                // Adiciona o formul·rio de adiÁ„o ao painel secund·rio
+                // Adiciona o formul√°rio de adi√ß√£o ao painel secund√°rio
                 InformationContainer.Panel2.Controls.Add(addScreen);
 
-                // Define a tabela atual no formul·rio de adiÁ„o
+                // Define a tabela atual no formul√°rio de adi√ß√£o
                 addScreen.currentTable = current_table;
 
                 // Define a propriedade Alimentos como verdadeira
                 addScreen.Alimentos = true;
 
-                // Registra o mÈtodo addFormClosed para restaurar a interface apÛs o fechamento do formul·rio de adiÁ„o
+                // Registra o m√©todo addFormClosed para restaurar a interface ap√≥s o fechamento do formul√°rio de adi√ß√£o
                 addScreen.addFormClosed += addFormClosed;
 
-                // Inicializa a tela de adiÁ„o
+                // Inicializa a tela de adi√ß√£o
                 addScreen.startup();
 
-                // Exibe o formul·rio de adiÁ„o
+                // Exibe o formul√°rio de adi√ß√£o
                 addScreen.Show();
             }*/
         }
 
         private void CollapsePanels()
         {
-          /*  // Desabilita e oculta o UserDataGrid durante a ediÁ„o
+          /*  // Desabilita e oculta o UserDataGrid durante a edi√ß√£o
             UserDataGrid.Visible = false;
             UserDataGrid.Enabled = false;
 
-            // Colapsa o painel principal para melhor visualizaÁ„o
+            // Colapsa o painel principal para melhor visualiza√ß√£o
             InformationContainer.Panel1Collapsed = true;
             MainSplitScreen.Panel1Collapsed = true; */
         }
-    }
-    public class InformationFrame
-    {
-        
+
+        private void ChangePageButton(object sender, EventArgs e)
+        {
+
+            string ButtonText = ((Button)sender).Text;
+            var currentPageStart = currentPage;
+            int maxPage = data.Tables[0].Rows.Count / 8;
+            if (searching)
+            {
+                maxPage = searchData.Rows.Count / 8;
+            }
+
+
+            if (ButtonText == "‚Æû" && currentPage < maxPage)
+                currentPage++;
+            else if (ButtonText == "‚Æú" && currentPage > 0)
+                currentPage--;
+
+            if (currentPageStart != currentPage)
+                if (!searching)
+                    GenerateNewUserPanel(data.Tables[0]);
+                else
+                    GenerateNewUserPanel(searchData);
+
+            pageLabel.Text = $"{currentPage}/{maxPage.ToString()}";
+        }
+
+        private void clearSearchButton_Click(object sender, EventArgs e)
+        {
+            SearchText.Text = "";
+            filter_combobox.Text = "Filtro";
+            searching = false;
+            GenerateNewUserPanel(data.Tables[tables.IndexOf(current_table)]);
+            currentPage = 0;
+        }
     }
 }

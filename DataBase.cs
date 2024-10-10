@@ -26,7 +26,7 @@ namespace Gerenciamento_de_Dietas
                 string query = "SELECT * FROM";
                 if (value == "usuario")
                 {
-                    query = "SELECT usuario.id AS 'Id', usuario.nome AS 'Nome', usuario.email AS 'Email', usuario.tipo AS 'Tipo', dieta.nome AS 'Dieta' FROM ";
+                    query = "SELECT usuario.id AS 'Id', usuario.nome AS 'Nome', usuario.tipo AS 'Tipo', dieta.nome AS 'Dieta', usuario.Genero, usuario.Idade, usuario.Altura, usuario.Peso, usuario.email FROM ";
                     condition += "LEFT JOIN dieta ON dieta.id = usuario.dieta";
                 }
                 else if (value == "refeicao")
@@ -67,7 +67,7 @@ namespace Gerenciamento_de_Dietas
                     $"{table}.id_dieta {condition}" , connection);
             else if (table == "usuario")
                 adapter.SelectCommand = new MySqlCommand($"SELECT {table}.id as Id, {table}.nome as Nome, " +
-                    $"{table}.email as Email, {table}.tipo as Tipo, dieta.nome as Dieta FROM {table} LEFT JOIN dieta ON dieta.id = " +
+                    $"{table}.tipo as Tipo, dieta.nome as Dieta, {table}.Genero, {table}.Idade, {table}.Altura, {table}.Peso,{table}.email as Email FROM {table} LEFT JOIN dieta ON dieta.id = " +
                     $"{table}.dieta {condition}", connection);
             else
                 adapter.SelectCommand = new MySqlCommand($"SELECT * FROM {table} {condition}" , connection);

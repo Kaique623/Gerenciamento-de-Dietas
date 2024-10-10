@@ -36,20 +36,16 @@
             this.AlimentosButton = new System.Windows.Forms.Button();
             this.DietaTabButton = new System.Windows.Forms.Button();
             this.UsuariosTabButton = new System.Windows.Forms.Button();
-            this.customPanel1 = new Gerenciamento_de_Dietas.CustomPanel();
-            this.alturaTemplateLabel = new System.Windows.Forms.Label();
-            this.idadeTemplateLabel = new System.Windows.Forms.Label();
-            this.TemplateGeneroLabel = new System.Windows.Forms.Label();
-            this.templateDietaLabel = new System.Windows.Forms.Label();
-            this.tipoLabelTemplate = new System.Windows.Forms.Label();
-            this.idLabelTemplate = new System.Windows.Forms.Label();
-            this.templateLabelUsuario = new System.Windows.Forms.Label();
-            this.pesoTemplateLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pageLabel = new System.Windows.Forms.Label();
+            this.changeTabRightButton = new System.Windows.Forms.Button();
+            this.ChangeTabLeftButton = new System.Windows.Forms.Button();
+            this.clearSearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitScreen)).BeginInit();
             this.MainSplitScreen.Panel1.SuspendLayout();
             this.MainSplitScreen.Panel2.SuspendLayout();
             this.MainSplitScreen.SuspendLayout();
-            this.customPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainSplitScreen
@@ -63,6 +59,7 @@
             // MainSplitScreen.Panel1
             // 
             this.MainSplitScreen.Panel1.BackColor = System.Drawing.Color.LightGreen;
+            this.MainSplitScreen.Panel1.Controls.Add(this.clearSearchButton);
             this.MainSplitScreen.Panel1.Controls.Add(this.filter_combobox);
             this.MainSplitScreen.Panel1.Controls.Add(this.refeicoesTabButton);
             this.MainSplitScreen.Panel1.Controls.Add(this.searchButton);
@@ -74,7 +71,7 @@
             // MainSplitScreen.Panel2
             // 
             this.MainSplitScreen.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.MainSplitScreen.Panel2.Controls.Add(this.customPanel1);
+            this.MainSplitScreen.Panel2.Controls.Add(this.panel1);
             this.MainSplitScreen.Size = new System.Drawing.Size(1148, 684);
             this.MainSplitScreen.SplitterDistance = 70;
             this.MainSplitScreen.SplitterWidth = 1;
@@ -156,101 +153,69 @@
             this.UsuariosTabButton.UseVisualStyleBackColor = false;
             this.UsuariosTabButton.Click += new System.EventHandler(this.TabButtonClick);
             // 
-            // customPanel1
+            // panel1
             // 
-            this.customPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.customPanel1.Controls.Add(this.pesoTemplateLabel);
-            this.customPanel1.Controls.Add(this.alturaTemplateLabel);
-            this.customPanel1.Controls.Add(this.idadeTemplateLabel);
-            this.customPanel1.Controls.Add(this.TemplateGeneroLabel);
-            this.customPanel1.Controls.Add(this.templateDietaLabel);
-            this.customPanel1.Controls.Add(this.tipoLabelTemplate);
-            this.customPanel1.Controls.Add(this.idLabelTemplate);
-            this.customPanel1.Controls.Add(this.templateLabelUsuario);
-            this.customPanel1.Location = new System.Drawing.Point(3, 24);
-            this.customPanel1.Name = "customPanel1";
-            this.customPanel1.Size = new System.Drawing.Size(292, 214);
-            this.customPanel1.TabIndex = 0;
+            this.panel1.BackColor = System.Drawing.Color.LightGreen;
+            this.panel1.Controls.Add(this.pageLabel);
+            this.panel1.Controls.Add(this.changeTabRightButton);
+            this.panel1.Controls.Add(this.ChangeTabLeftButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 543);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1148, 70);
+            this.panel1.TabIndex = 0;
             // 
-            // alturaTemplateLabel
+            // pageLabel
             // 
-            this.alturaTemplateLabel.AutoSize = true;
-            this.alturaTemplateLabel.BackColor = System.Drawing.SystemColors.Window;
-            this.alturaTemplateLabel.Location = new System.Drawing.Point(153, 55);
-            this.alturaTemplateLabel.Name = "alturaTemplateLabel";
-            this.alturaTemplateLabel.Size = new System.Drawing.Size(42, 15);
-            this.alturaTemplateLabel.TabIndex = 8;
-            this.alturaTemplateLabel.Text = "Altura:";
+            this.pageLabel.AutoSize = true;
+            this.pageLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.pageLabel.Location = new System.Drawing.Point(539, 19);
+            this.pageLabel.Name = "pageLabel";
+            this.pageLabel.Size = new System.Drawing.Size(49, 32);
+            this.pageLabel.TabIndex = 2;
+            this.pageLabel.Text = "0/0";
+            this.pageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // idadeTemplateLabel
+            // changeTabRightButton
             // 
-            this.idadeTemplateLabel.AutoSize = true;
-            this.idadeTemplateLabel.BackColor = System.Drawing.SystemColors.Window;
-            this.idadeTemplateLabel.Location = new System.Drawing.Point(153, 30);
-            this.idadeTemplateLabel.Name = "idadeTemplateLabel";
-            this.idadeTemplateLabel.Size = new System.Drawing.Size(39, 15);
-            this.idadeTemplateLabel.TabIndex = 7;
-            this.idadeTemplateLabel.Text = "Idade:";
+            this.changeTabRightButton.BackColor = System.Drawing.Color.White;
+            this.changeTabRightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.changeTabRightButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.changeTabRightButton.Location = new System.Drawing.Point(603, 13);
+            this.changeTabRightButton.Margin = new System.Windows.Forms.Padding(2);
+            this.changeTabRightButton.Name = "changeTabRightButton";
+            this.changeTabRightButton.Size = new System.Drawing.Size(44, 44);
+            this.changeTabRightButton.TabIndex = 1;
+            this.changeTabRightButton.Text = "⮞";
+            this.changeTabRightButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.changeTabRightButton.UseVisualStyleBackColor = false;
+            this.changeTabRightButton.Click += new System.EventHandler(this.ChangePageButton);
             // 
-            // TemplateGeneroLabel
+            // ChangeTabLeftButton
             // 
-            this.TemplateGeneroLabel.AutoSize = true;
-            this.TemplateGeneroLabel.BackColor = System.Drawing.SystemColors.Window;
-            this.TemplateGeneroLabel.Location = new System.Drawing.Point(23, 130);
-            this.TemplateGeneroLabel.Name = "TemplateGeneroLabel";
-            this.TemplateGeneroLabel.Size = new System.Drawing.Size(48, 15);
-            this.TemplateGeneroLabel.TabIndex = 6;
-            this.TemplateGeneroLabel.Text = "Gênero:";
+            this.ChangeTabLeftButton.BackColor = System.Drawing.Color.White;
+            this.ChangeTabLeftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChangeTabLeftButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ChangeTabLeftButton.Location = new System.Drawing.Point(479, 13);
+            this.ChangeTabLeftButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ChangeTabLeftButton.Name = "ChangeTabLeftButton";
+            this.ChangeTabLeftButton.Size = new System.Drawing.Size(44, 44);
+            this.ChangeTabLeftButton.TabIndex = 0;
+            this.ChangeTabLeftButton.Text = "⮜";
+            this.ChangeTabLeftButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ChangeTabLeftButton.UseVisualStyleBackColor = false;
+            this.ChangeTabLeftButton.Click += new System.EventHandler(this.ChangePageButton);
             // 
-            // templateDietaLabel
+            // clearSearchButton
             // 
-            this.templateDietaLabel.AutoSize = true;
-            this.templateDietaLabel.BackColor = System.Drawing.SystemColors.Window;
-            this.templateDietaLabel.Location = new System.Drawing.Point(23, 105);
-            this.templateDietaLabel.Name = "templateDietaLabel";
-            this.templateDietaLabel.Size = new System.Drawing.Size(37, 15);
-            this.templateDietaLabel.TabIndex = 5;
-            this.templateDietaLabel.Text = "Dieta:";
-            // 
-            // tipoLabelTemplate
-            // 
-            this.tipoLabelTemplate.AutoSize = true;
-            this.tipoLabelTemplate.BackColor = System.Drawing.Color.White;
-            this.tipoLabelTemplate.Location = new System.Drawing.Point(23, 80);
-            this.tipoLabelTemplate.Name = "tipoLabelTemplate";
-            this.tipoLabelTemplate.Size = new System.Drawing.Size(36, 15);
-            this.tipoLabelTemplate.TabIndex = 4;
-            this.tipoLabelTemplate.Text = "Tipo: ";
-            // 
-            // idLabelTemplate
-            // 
-            this.idLabelTemplate.AutoSize = true;
-            this.idLabelTemplate.BackColor = System.Drawing.SystemColors.Window;
-            this.idLabelTemplate.Location = new System.Drawing.Point(23, 30);
-            this.idLabelTemplate.Name = "idLabelTemplate";
-            this.idLabelTemplate.Size = new System.Drawing.Size(24, 15);
-            this.idLabelTemplate.TabIndex = 3;
-            this.idLabelTemplate.Text = "ID: ";
-            // 
-            // templateLabelUsuario
-            // 
-            this.templateLabelUsuario.AutoSize = true;
-            this.templateLabelUsuario.BackColor = System.Drawing.SystemColors.Window;
-            this.templateLabelUsuario.Location = new System.Drawing.Point(23, 55);
-            this.templateLabelUsuario.Name = "templateLabelUsuario";
-            this.templateLabelUsuario.Size = new System.Drawing.Size(53, 15);
-            this.templateLabelUsuario.TabIndex = 1;
-            this.templateLabelUsuario.Text = "Usuario: ";
-            // 
-            // pesoTemplateLabel
-            // 
-            this.pesoTemplateLabel.AutoSize = true;
-            this.pesoTemplateLabel.BackColor = System.Drawing.SystemColors.Window;
-            this.pesoTemplateLabel.Location = new System.Drawing.Point(153, 80);
-            this.pesoTemplateLabel.Name = "pesoTemplateLabel";
-            this.pesoTemplateLabel.Size = new System.Drawing.Size(60, 15);
-            this.pesoTemplateLabel.TabIndex = 9;
-            this.pesoTemplateLabel.Text = "Peso (KG):";
+            this.clearSearchButton.Location = new System.Drawing.Point(504, 18);
+            this.clearSearchButton.Name = "clearSearchButton";
+            this.clearSearchButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.clearSearchButton.Size = new System.Drawing.Size(101, 30);
+            this.clearSearchButton.TabIndex = 11;
+            this.clearSearchButton.Text = "Limpar Pesquisa";
+            this.clearSearchButton.UseVisualStyleBackColor = true;
+            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
             // 
             // MainApp
             // 
@@ -265,8 +230,8 @@
             this.MainSplitScreen.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitScreen)).EndInit();
             this.MainSplitScreen.ResumeLayout(false);
-            this.customPanel1.ResumeLayout(false);
-            this.customPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -280,14 +245,10 @@
         public SplitContainer MainSplitScreen;
         private Button refeicoesTabButton;
         private ComboBox filter_combobox;
-        private CustomPanel customPanel1;
-        private Label templateLabelUsuario;
-        private Label idLabelTemplate;
-        private Label tipoLabelTemplate;
-        private Label templateDietaLabel;
-        private Label TemplateGeneroLabel;
-        private Label idadeTemplateLabel;
-        private Label alturaTemplateLabel;
-        private Label pesoTemplateLabel;
+        private Panel panel1;
+        private Button changeTabRightButton;
+        private Button ChangeTabLeftButton;
+        private Label pageLabel;
+        private Button clearSearchButton;
     }
 }
