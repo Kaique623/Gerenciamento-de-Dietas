@@ -254,6 +254,7 @@
             this.UserDataGrid.RowTemplate.Height = 25;
             this.UserDataGrid.Size = new System.Drawing.Size(1105, 574);
             this.UserDataGrid.TabIndex = 1;
+            this.UserDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UserDataGrid_CellContentClick);
             // 
             // MainApp
             // 

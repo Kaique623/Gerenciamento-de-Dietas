@@ -8,7 +8,7 @@ namespace Gerenciamento_de_Dietas
         List<string> tables = new List<string>() {"usuario", "dieta", "alimento","refeicao", "refeicao_alimento"};
 
         string current_table = "usuario";
-        DataGridViewButtonColumn visualizar_alimento = new System.Windows.Forms.DataGridViewButtonColumn();
+        DataGridViewButtonColumn newColumn = new DataGridViewButtonColumn();
 
         DataSet data = new DataSet();
 
@@ -26,6 +26,18 @@ namespace Gerenciamento_de_Dietas
 
             // Define a fonte de dados do DataGrid como a primeira tabela do DataSet.
             UserDataGrid.DataSource = data.Tables[0];
+            UserDataGrid.AutoGenerateColumns = false;
+
+            // Configura a coluna "visualizar_alimento" como um botão.
+            newColumn.HeaderText = "";  // O cabeçalho da coluna será vazio.
+            newColumn.ReadOnly = true;  // Define a coluna como somente leitura.
+            newColumn.Visible = true;  // Torna a coluna visível.
+            newColumn.Text = "Recomendar Dieta";
+            newColumn.UseColumnTextForButtonValue = true;  // Define o texto do botão.
+
+            // Adiciona a coluna de botão "visualizar_alimento" ao DataGrid.
+            UserDataGrid.Columns.Add(newColumn);
+
             fillFilter();
         }
 
@@ -44,7 +56,7 @@ namespace Gerenciamento_de_Dietas
             try
             {
                 // Tenta remover a coluna "visualizar_alimento" do DataGrid caso ela já exista.
-                UserDataGrid.Columns.Remove(visualizar_alimento);
+                UserDataGrid.Columns.Remove(newColumn);
             }
             catch
             {
@@ -64,6 +76,33 @@ namespace Gerenciamento_de_Dietas
                 // Define a tabela atual como "usuario" e atualiza o DataSource com os dados de usuários.
                 current_table = "usuario";
                 UserDataGrid.DataSource = data.Tables[0];
+                // Desativa a geração automática de colunas para personalizar as colunas manualmente.
+                UserDataGrid.AutoGenerateColumns = false;
+
+                // Configura a coluna "visualizar_alimento" como um botão.
+                newColumn.HeaderText = "";  // O cabeçalho da coluna será vazio.
+                newColumn.ReadOnly = true;  // Define a coluna como somente leitura.
+                newColumn.Visible = true;
+                newColumn.Name = "recomedarDieta";// Torna a coluna visível.
+                newColumn.Text = "Recomendar Dieta";  // Texto exibido no botão.
+                newColumn.UseColumnTextForButtonValue = true;  // Define o texto do botão.
+
+                // Adiciona a coluna de botão "visualizar_alimento" ao DataGrid.
+                UserDataGrid.Columns.Add(newColumn);
+
+                // Define a posição da coluna "visualizar_alimento" para ser a última.
+                UserDataGrid.Columns["recomedarDieta"].DisplayIndex = UserDataGrid.Columns.Count - 1;
+
+                // Define a posição da coluna "id" para ser a primeira.
+                try
+                {
+                    UserDataGrid.Columns["id"].DisplayIndex = 0;
+                }
+                catch
+                {
+                    MessageBox.Show("Erro ao Carregar DB");
+                }
+
             }
             // Muda o DataGrid para a tabela de "Dietas" se o botão clicado for "Dietas".
             else if (buttonText == "Dietas")
@@ -92,15 +131,15 @@ namespace Gerenciamento_de_Dietas
                     UserDataGrid.AutoGenerateColumns = false;
 
                     // Configura a coluna "visualizar_alimento" como um botão.
-                    visualizar_alimento.HeaderText = "";  // O cabeçalho da coluna será vazio.
-                    visualizar_alimento.Name = "visualizar_alimento";  // Nome da coluna.
-                    visualizar_alimento.ReadOnly = true;  // Define a coluna como somente leitura.
-                    visualizar_alimento.Visible = true;  // Torna a coluna visível.
-                    visualizar_alimento.Text = "Visualizar Alimentos";  // Texto exibido no botão.
-                    visualizar_alimento.UseColumnTextForButtonValue = true;  // Define o texto do botão.
+                    newColumn.HeaderText = "";  // O cabeçalho da coluna será vazio.
+                    newColumn.ReadOnly = true;  // Define a coluna como somente leitura.
+                    newColumn.Visible = true;
+                    newColumn.Name = "visualizar_alimento";// Torna a coluna visível.
+                    newColumn.Text = "Visualizar Alimentos";  // Texto exibido no botão.
+                    newColumn.UseColumnTextForButtonValue = true;  // Define o texto do botão.
 
                     // Adiciona a coluna de botão "visualizar_alimento" ao DataGrid.
-                    UserDataGrid.Columns.Add(visualizar_alimento);
+                    UserDataGrid.Columns.Add(newColumn);
 
                     // Define a posição da coluna "visualizar_alimento" para ser a última.
                     UserDataGrid.Columns["visualizar_alimento"].DisplayIndex = UserDataGrid.Columns.Count - 1;
@@ -310,6 +349,28 @@ namespace Gerenciamento_de_Dietas
                 addScreen.startup();
 
                 // Exibe o formulário de adição
+                addScreen.Show();
+            }
+            else if (current_table == "usuario" && UserDataGrid.Columns[e.ColumnIndex].CellType == typeof(DataGridViewButtonCell))
+            {
+                // Cria uma nova instância do formulário de adição
+                addForm addScreen = new addForm();
+
+                addScreen.id = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[0].Value);
+                addScreen.entry1 = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[1].Value);
+                addScreen.entry2 = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[2].Value);
+                addScreen.entry3 = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[3].Value);
+                addScreen.entry4 = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[4].Value);
+                addScreen.entry5 = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[5].Value);
+                addScreen.entry6 = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[6].Value);
+                addScreen.entry7 = Convert.ToString(UserDataGrid.Rows[e.RowIndex].Cells[7].Value);
+                addScreen.TopLevel = false;
+                CollapsePanels();
+                InformationContainer.Panel2.Controls.Add(addScreen);
+                addScreen.currentTable = current_table;
+                addScreen.Alimentos = true;
+                addScreen.addFormClosed += addFormClosed;
+                addScreen.startup();
                 addScreen.Show();
             }
         }

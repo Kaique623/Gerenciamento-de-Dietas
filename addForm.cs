@@ -10,16 +10,22 @@ namespace Gerenciamento_de_Dietas
     public partial class addForm : Form
     {
         public event EventHandler addFormClosed; // Evento acionado ao fechar o formulário
-        public string entry1 = ""; // Campo para armazenar a primeira entrada
-        public string entry2 = ""; // Campo para armazenar a segunda entrada
-        public string entry3 = ""; // Campo para armazenar a terceira entrada
-        public string entry4 = ""; // Campo para armazenar a quarta entrada
-        public string entry5 = ""; // Campo para armazenar a quinta entrada
-        public string id = ""; // Campo para armazenar o ID
-        public bool editMode = false; // Indica se o formulário está em modo de edição
-        public string currentTable = ""; // Armazena a tabela atual
-        public bool Alimentos = false; // Indica se o formulário lida com alimentos
-        public string idRefeicao = ""; // Campo para armazenar o ID da refeição
+        public string entry1 = "";
+        public string entry2 = "";
+        public string entry3 = "";
+        public string entry4 = "";
+        public string entry5 = "";
+        public string entry6 = "";
+        public string entry7 = "";
+        public string entry8 = "";
+
+        public string id = "";
+        public bool editMode = false; 
+        public string currentTable = "";
+        public bool Alimentos = false;
+        public string idRefeicao = "";
+
+        double consumoCalorico = 0f;
 
         public addForm()
         {
@@ -136,12 +142,35 @@ namespace Gerenciamento_de_Dietas
             }
 
             // Preenche os campos de entrada com base na tabela atual
-            if (currentTable == "usuario")
+            if (currentTable == "usuario" && !Alimentos)
             {
                 nomeTextBox.Text = entry1;
                 email_TextBox.Text = entry2;
                 tipo_combobox.Text = entry3;
                 AddTabControl.SelectedIndex = 0; // Seleciona a aba correspondente
+            }
+            if (currentTable == "usuario" && Alimentos)
+            {
+                nomeLabel.Text = "Nome: " + entry1;
+                generoLabel.Text = "Genero: " + entry4;
+                idadeLabel.Text = "Idade: " + entry5;
+                pesoLabel.Text = "Peso: " + entry7;
+                alturaLabel.Text = "Altura: " + entry6;
+                objetivoLabel.Text = "Objetivo: ";
+
+                tipo_combobox.Text = entry3;
+                AddTabControl.SelectedIndex = 5;
+
+                if (entry4 == "M")
+                {
+                    consumoCalorico = 66.47 + (13.75 * Convert.ToDouble(entry7)) + (5.003 * Convert.ToDouble(entry6)) - (6.75 * Convert.ToDouble(entry5));
+                }
+                else
+                {
+                    consumoCalorico = 655.1 + (9.56 * Convert.ToDouble(entry7)) + (1.85 * Convert.ToDouble(entry6)) - (4.68 * Convert.ToDouble(entry5));
+                }
+
+                consumoCaloricoLabel.Text = "Consumo Calorico Diario: " + consumoCalorico;
             }
             else if (currentTable == "alimento")
             {
@@ -273,6 +302,29 @@ namespace Gerenciamento_de_Dietas
             {
                 dieta_combobox.Enabled = true;
             }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            nomeLabel.Text = "Nome: " + entry1;
+            generoLabel.Text = "Genero: " + entry4;
+            idadeLabel.Text = "Idade: " + entry5;
+            pesoLabel.Text = "Peso: " + entry7;
+            alturaLabel.Text = "Altura: " + entry6;
+
+            string sinal = ">";
+
+            if (objetivoComboBox.Text == "Ganhar Peso")
+                sinal = ">";
+            else if (objetivoComboBox.Text == "Perder Peso")
+                sinal = "<";
+
+            consumoCalorico = Convert.ToInt16(consumoCalorico);
+
+            if (objetivoComboBox.Text != "Manter Peso")
+                dietarecomendacao_dataGrid.DataSource = DataBase.SearchContent("dieta", $"WHERE dieta.calorias_totais {sinal} {consumoCalorico}");
+            else
+                dietarecomendacao_dataGrid.DataSource = DataBase.SearchContent("dieta", $"WHERE dieta.calorias_totais > {consumoCalorico - 100} AND dieta.calorias_totais < {consumoCalorico + 100}");
         }
     }
 }

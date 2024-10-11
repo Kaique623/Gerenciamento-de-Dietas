@@ -83,6 +83,19 @@
             this.id_alimentoTextBox = new System.Windows.Forms.TextBox();
             this.sairButton = new System.Windows.Forms.Button();
             this.refeicao_alimento_datagrid = new System.Windows.Forms.DataGridView();
+            this.recomedacao_de_dietas = new System.Windows.Forms.TabPage();
+            this.consumoCaloricoLabel = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.objetivoComboBox = new System.Windows.Forms.ComboBox();
+            this.alturaLabel = new System.Windows.Forms.Label();
+            this.objetivoLabel = new System.Windows.Forms.Label();
+            this.pesoLabel = new System.Windows.Forms.Label();
+            this.idadeLabel = new System.Windows.Forms.Label();
+            this.generoLabel = new System.Windows.Forms.Label();
+            this.nomeLabel = new System.Windows.Forms.Label();
+            this.DietasRecomendadas = new System.Windows.Forms.Label();
+            this.dietarecomendacao_dataGrid = new System.Windows.Forms.DataGridView();
+            this.button9 = new System.Windows.Forms.Button();
             this.AddTabControl.SuspendLayout();
             this.usuarioTabPage.SuspendLayout();
             this.alimentoTabPage.SuspendLayout();
@@ -90,6 +103,8 @@
             this.RefeicaoTabPage.SuspendLayout();
             this.refeicao_alimentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.refeicao_alimento_datagrid)).BeginInit();
+            this.recomedacao_de_dietas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dietarecomendacao_dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // CancelButton
@@ -207,7 +222,8 @@
             this.AddTabControl.Controls.Add(this.DietaTabPage);
             this.AddTabControl.Controls.Add(this.RefeicaoTabPage);
             this.AddTabControl.Controls.Add(this.refeicao_alimentos);
-            this.AddTabControl.Location = new System.Drawing.Point(-9, -24);
+            this.AddTabControl.Controls.Add(this.recomedacao_de_dietas);
+            this.AddTabControl.Location = new System.Drawing.Point(-9, 2);
             this.AddTabControl.Name = "AddTabControl";
             this.AddTabControl.SelectedIndex = 0;
             this.AddTabControl.Size = new System.Drawing.Size(1227, 713);
@@ -693,6 +709,152 @@
             this.refeicao_alimento_datagrid.Size = new System.Drawing.Size(1119, 463);
             this.refeicao_alimento_datagrid.TabIndex = 0;
             // 
+            // recomedacao_de_dietas
+            // 
+            this.recomedacao_de_dietas.Controls.Add(this.button9);
+            this.recomedacao_de_dietas.Controls.Add(this.consumoCaloricoLabel);
+            this.recomedacao_de_dietas.Controls.Add(this.button8);
+            this.recomedacao_de_dietas.Controls.Add(this.objetivoComboBox);
+            this.recomedacao_de_dietas.Controls.Add(this.alturaLabel);
+            this.recomedacao_de_dietas.Controls.Add(this.objetivoLabel);
+            this.recomedacao_de_dietas.Controls.Add(this.pesoLabel);
+            this.recomedacao_de_dietas.Controls.Add(this.idadeLabel);
+            this.recomedacao_de_dietas.Controls.Add(this.generoLabel);
+            this.recomedacao_de_dietas.Controls.Add(this.nomeLabel);
+            this.recomedacao_de_dietas.Controls.Add(this.DietasRecomendadas);
+            this.recomedacao_de_dietas.Controls.Add(this.dietarecomendacao_dataGrid);
+            this.recomedacao_de_dietas.Location = new System.Drawing.Point(4, 24);
+            this.recomedacao_de_dietas.Name = "recomedacao_de_dietas";
+            this.recomedacao_de_dietas.Padding = new System.Windows.Forms.Padding(3);
+            this.recomedacao_de_dietas.Size = new System.Drawing.Size(1219, 685);
+            this.recomedacao_de_dietas.TabIndex = 5;
+            this.recomedacao_de_dietas.Text = "RecomendaçãoDeDietasTabPage";
+            this.recomedacao_de_dietas.UseVisualStyleBackColor = true;
+            // 
+            // consumoCaloricoLabel
+            // 
+            this.consumoCaloricoLabel.AutoSize = true;
+            this.consumoCaloricoLabel.Location = new System.Drawing.Point(385, 40);
+            this.consumoCaloricoLabel.Name = "consumoCaloricoLabel";
+            this.consumoCaloricoLabel.Size = new System.Drawing.Size(146, 15);
+            this.consumoCaloricoLabel.TabIndex = 10;
+            this.consumoCaloricoLabel.Text = "Consumo Calorico Diario: ";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(1022, 65);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(129, 36);
+            this.button8.TabIndex = 9;
+            this.button8.Text = "Recomendar Dietas";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // objetivoComboBox
+            // 
+            this.objetivoComboBox.FormattingEnabled = true;
+            this.objetivoComboBox.Items.AddRange(new object[] {
+            "Ganhar Peso",
+            "Perder Peso",
+            "Manter Peso"});
+            this.objetivoComboBox.Location = new System.Drawing.Point(274, 73);
+            this.objetivoComboBox.Name = "objetivoComboBox";
+            this.objetivoComboBox.Size = new System.Drawing.Size(88, 23);
+            this.objetivoComboBox.TabIndex = 8;
+            // 
+            // alturaLabel
+            // 
+            this.alturaLabel.AutoSize = true;
+            this.alturaLabel.Location = new System.Drawing.Point(210, 58);
+            this.alturaLabel.Name = "alturaLabel";
+            this.alturaLabel.Size = new System.Drawing.Size(45, 15);
+            this.alturaLabel.TabIndex = 7;
+            this.alturaLabel.Text = "Altura: ";
+            // 
+            // objetivoLabel
+            // 
+            this.objetivoLabel.AutoSize = true;
+            this.objetivoLabel.Location = new System.Drawing.Point(210, 76);
+            this.objetivoLabel.Name = "objetivoLabel";
+            this.objetivoLabel.Size = new System.Drawing.Size(58, 15);
+            this.objetivoLabel.TabIndex = 6;
+            this.objetivoLabel.Text = "Objetivo: ";
+            // 
+            // pesoLabel
+            // 
+            this.pesoLabel.AutoSize = true;
+            this.pesoLabel.Location = new System.Drawing.Point(210, 40);
+            this.pesoLabel.Name = "pesoLabel";
+            this.pesoLabel.Size = new System.Drawing.Size(38, 15);
+            this.pesoLabel.TabIndex = 5;
+            this.pesoLabel.Text = "Peso: ";
+            // 
+            // idadeLabel
+            // 
+            this.idadeLabel.AutoSize = true;
+            this.idadeLabel.Location = new System.Drawing.Point(8, 76);
+            this.idadeLabel.Name = "idadeLabel";
+            this.idadeLabel.Size = new System.Drawing.Size(42, 15);
+            this.idadeLabel.TabIndex = 4;
+            this.idadeLabel.Text = "Idade: ";
+            // 
+            // generoLabel
+            // 
+            this.generoLabel.AutoSize = true;
+            this.generoLabel.Location = new System.Drawing.Point(6, 58);
+            this.generoLabel.Name = "generoLabel";
+            this.generoLabel.Size = new System.Drawing.Size(51, 15);
+            this.generoLabel.TabIndex = 3;
+            this.generoLabel.Text = "Genero: ";
+            // 
+            // nomeLabel
+            // 
+            this.nomeLabel.AutoSize = true;
+            this.nomeLabel.Location = new System.Drawing.Point(6, 40);
+            this.nomeLabel.Name = "nomeLabel";
+            this.nomeLabel.Size = new System.Drawing.Size(46, 15);
+            this.nomeLabel.TabIndex = 2;
+            this.nomeLabel.Text = "Nome: ";
+            // 
+            // DietasRecomendadas
+            // 
+            this.DietasRecomendadas.AutoSize = true;
+            this.DietasRecomendadas.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DietasRecomendadas.Location = new System.Drawing.Point(6, 3);
+            this.DietasRecomendadas.Name = "DietasRecomendadas";
+            this.DietasRecomendadas.Size = new System.Drawing.Size(207, 28);
+            this.DietasRecomendadas.TabIndex = 1;
+            this.DietasRecomendadas.Text = "Dietas Recomendadas:";
+            // 
+            // dietarecomendacao_dataGrid
+            // 
+            this.dietarecomendacao_dataGrid.AllowUserToAddRows = false;
+            this.dietarecomendacao_dataGrid.AllowUserToDeleteRows = false;
+            this.dietarecomendacao_dataGrid.AllowUserToResizeColumns = false;
+            this.dietarecomendacao_dataGrid.AllowUserToResizeRows = false;
+            this.dietarecomendacao_dataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dietarecomendacao_dataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dietarecomendacao_dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dietarecomendacao_dataGrid.Location = new System.Drawing.Point(6, 105);
+            this.dietarecomendacao_dataGrid.Name = "dietarecomendacao_dataGrid";
+            this.dietarecomendacao_dataGrid.RowTemplate.Height = 25;
+            this.dietarecomendacao_dataGrid.Size = new System.Drawing.Size(1145, 549);
+            this.dietarecomendacao_dataGrid.TabIndex = 0;
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.Red;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button9.ForeColor = System.Drawing.Color.Black;
+            this.button9.Location = new System.Drawing.Point(1022, 24);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(129, 35);
+            this.button9.TabIndex = 18;
+            this.button9.Text = "Sair";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
             // addForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -722,6 +884,9 @@
             this.refeicao_alimentos.ResumeLayout(false);
             this.refeicao_alimentos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.refeicao_alimento_datagrid)).EndInit();
+            this.recomedacao_de_dietas.ResumeLayout(false);
+            this.recomedacao_de_dietas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dietarecomendacao_dataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -783,5 +948,18 @@
         private ComboBox dieta_combobox;
         private Label label8;
         private TextBox medida_textbox;
+        private TabPage recomedacao_de_dietas;
+        private Label alturaLabel;
+        private Label objetivoLabel;
+        private Label pesoLabel;
+        private Label idadeLabel;
+        private Label generoLabel;
+        private Label nomeLabel;
+        private Label DietasRecomendadas;
+        private DataGridView dietarecomendacao_dataGrid;
+        private ComboBox objetivoComboBox;
+        private Button button8;
+        private Label consumoCaloricoLabel;
+        private Button button9;
     }
 }
