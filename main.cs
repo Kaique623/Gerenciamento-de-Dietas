@@ -72,7 +72,7 @@ namespace Gerenciamento_de_Dietas
 
                 if (currentFrame > 3)
                     ypos = ypos + 214;
-
+                    
                 Dictionary<string, string> auxlist = new Dictionary<string, string>();
 
                 for (int i = 0; i < 8; i++)
@@ -88,10 +88,14 @@ namespace Gerenciamento_de_Dietas
                 }
 
                 InfoPanels[currentFrame] = new InformationFrame();
+                
                 await Task.Run( () => InfoPanels[currentFrame].userMain(auxlist, xpos, ypos));
 
-                MainSplitScreen.Panel2.Controls.Add(InfoPanels[currentFrame].mainPanel);
-                currentFrame++;
+                if (auxlist.Values.Count != 0)
+                {
+                    MainSplitScreen.Panel2.Controls.Add(InfoPanels[currentFrame].mainPanel);
+                    currentFrame++;
+                }
             }
         }
 
@@ -249,58 +253,7 @@ namespace Gerenciamento_de_Dietas
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            // Cria uma nova tela de adição no modo de edição
-            addForm addScreen = new addForm();
-            addScreen.editMode = true;
 
-            try
-            {
-                /*
-                // Coleta os dados da linha selecionada no UserDataGrid
-
-                // Coleta o valor da primeira célula (ID)
-                addScreen.id = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[0].Value);
-
-                // Coleta o valor da segunda e terceira célula (campos de entrada)
-                addScreen.entry1 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[1].Value);
-                addScreen.entry2 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[2].Value);
-
-                // Se a tabela atual não for "dieta", coleta o valor da terceira entrada
-                if (current_table != "dieta")
-                    addScreen.entry3 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[3].Value);
-
-                // Se a tabela atual for "alimento", coleta valores extras
-                if (current_table == "alimento" || current_table == "usuario")
-                    addScreen.entry4 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[4].Value);
-                if (current_table == "alimento")
-                    addScreen.entry5 = Convert.ToString(UserDataGrid.SelectedRows[0].Cells[5].Value); */
-
-                // Define a tabela atual no formulário de edição
-                addScreen.currentTable = current_table;
-
-                // Configura a tela de edição
-                addScreen.TopLevel = false;
-                this.TopLevel = true;
-
-                // Adiciona o formulário de edição ao painel secundário
-               // InformationContainer.Panel2.Controls.Add(addScreen);
-
-                // Registra o evento para restaurar a interface após fechar o formulário de edição
-                addScreen.addFormClosed += addFormClosed;
-
-                CollapsePanels();
-
-                // Inicializa o formulário de edição
-                addScreen.startup();
-
-                // Exibe o formulário de edição
-                addScreen.Show();
-            }
-            catch
-            {
-                // Caso nenhuma linha esteja selecionada, exibe uma mensagem de erro
-                MessageBox.Show("Nenhuma Fileira Selecionada!");
-            }
         }
 
         private void removeButton_Click(object sender, EventArgs e)

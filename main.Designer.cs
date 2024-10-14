@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.MainSplitScreen = new System.Windows.Forms.SplitContainer();
+            this.clearSearchButton = new System.Windows.Forms.Button();
             this.filter_combobox = new System.Windows.Forms.ComboBox();
             this.refeicoesTabButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.pageLabel = new System.Windows.Forms.Label();
             this.changeTabRightButton = new System.Windows.Forms.Button();
             this.ChangeTabLeftButton = new System.Windows.Forms.Button();
-            this.clearSearchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitScreen)).BeginInit();
             this.MainSplitScreen.Panel1.SuspendLayout();
             this.MainSplitScreen.Panel2.SuspendLayout();
@@ -73,9 +73,20 @@
             this.MainSplitScreen.Panel2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.MainSplitScreen.Panel2.Controls.Add(this.panel1);
             this.MainSplitScreen.Size = new System.Drawing.Size(1148, 684);
-            this.MainSplitScreen.SplitterDistance = 70;
+            this.MainSplitScreen.SplitterDistance = 67;
             this.MainSplitScreen.SplitterWidth = 1;
             this.MainSplitScreen.TabIndex = 0;
+            // 
+            // clearSearchButton
+            // 
+            this.clearSearchButton.Location = new System.Drawing.Point(504, 18);
+            this.clearSearchButton.Name = "clearSearchButton";
+            this.clearSearchButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.clearSearchButton.Size = new System.Drawing.Size(101, 30);
+            this.clearSearchButton.TabIndex = 11;
+            this.clearSearchButton.Text = "Limpar Pesquisa";
+            this.clearSearchButton.UseVisualStyleBackColor = true;
+            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
             // 
             // filter_combobox
             // 
@@ -160,7 +171,7 @@
             this.panel1.Controls.Add(this.changeTabRightButton);
             this.panel1.Controls.Add(this.ChangeTabLeftButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 543);
+            this.panel1.Location = new System.Drawing.Point(0, 546);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1148, 70);
             this.panel1.TabIndex = 0;
@@ -205,17 +216,6 @@
             this.ChangeTabLeftButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.ChangeTabLeftButton.UseVisualStyleBackColor = false;
             this.ChangeTabLeftButton.Click += new System.EventHandler(this.ChangePageButton);
-            // 
-            // clearSearchButton
-            // 
-            this.clearSearchButton.Location = new System.Drawing.Point(504, 18);
-            this.clearSearchButton.Name = "clearSearchButton";
-            this.clearSearchButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.clearSearchButton.Size = new System.Drawing.Size(101, 30);
-            this.clearSearchButton.TabIndex = 11;
-            this.clearSearchButton.Text = "Limpar Pesquisa";
-            this.clearSearchButton.UseVisualStyleBackColor = true;
-            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
             // 
             // MainApp
             // 

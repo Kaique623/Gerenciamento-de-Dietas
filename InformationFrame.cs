@@ -33,15 +33,49 @@ namespace Gerenciamento_de_Dietas
                 labeldict[key].AutoSize = true;
                 labeldict[key].Text = $"{key}: {Information[key]}";
                 mainPanel.Controls.Add(labeldict[key]);
+                labeldict[key].Click += new System.EventHandler(PanelClick);
                 frameCount ++;
             }
-            if (Information.Count > 0)
+
+            mainPanel.Location = new Point(x, y);
+            mainPanel.Name = "mainPanel";
+            mainPanel.Size = new Size(300, 214);
+            mainPanel.TabIndex = 0;
+
+            mainPanel.Click += new System.EventHandler(PanelClick);
+        }
+        
+        public void PanelClick(object sender, EventArgs e)
+        {
+            CustomPanel panel = new CustomPanel();
+            string id = "";
+
+            try
             {
-                mainPanel.Location = new Point(x, y);
-                mainPanel.Name = "mainPanel";
-                mainPanel.Size = new Size(300, 214);
-                mainPanel.TabIndex = 0;
+                if (((CustomPanel)sender).Name == "mainPanel")
+                    panel = (CustomPanel)sender;
             }
+            catch
+            {
+                panel = (CustomPanel)((Label)sender).Parent;
+            }
+
+            foreach (var c in panel.Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    if (((Label)c).Text.StartsWith("Id: "))
+                    {
+                        id = ((Label)c).Text.Replace("Id: ", "");
+                        MessageBox.Show(id);
+                    }
+                }
+            }
+
+        }
+        public void OpenUserEditScreen(string id)
+        {
+            
         }
     }
 }
