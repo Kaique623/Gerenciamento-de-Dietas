@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/U8Ehbb9NkPWf3roq5rJVK9EKEFJIWdz9pznrmV/rxEnx8t446JNLRotX/eA7ao0Qf2yb9RQJECELUZaKiuiMQ==",
+  "dgSpecHash": "71SPAPgBxhx9fvwCKJxO5gbFe6S/bAgGdo8jM1Y/U43RtFNwOOHoOGhdLW83EXBvdgheEb/2XY7hKKj1F99I2A==",
   "success": true,
   "projectFilePath": "C:\\Users\\997979\\OneDrive - SENAC em Minas - EDU\\Área de Trabalho\\c#\\Gerenciamento de Dietas\\Gerenciamento de Dietas.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,9 @@
     "C:\\Users\\997979\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\mysql.data\\9.0.0\\mysql.data.9.0.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\questpdf\\2024.10.0\\questpdf.2024.10.0.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\slintdotnet\\1.7.1\\slintdotnet.1.7.1.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\syncfusion.licensing\\27.1.52\\syncfusion.licensing.27.1.52.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\syncfusion.shared.wpf\\27.1.52\\syncfusion.shared.wpf.27.1.52.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.1\\system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",

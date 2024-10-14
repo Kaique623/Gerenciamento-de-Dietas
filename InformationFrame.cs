@@ -15,6 +15,7 @@ namespace Gerenciamento_de_Dietas
         public void userMain(Dictionary<string, string> Information, int x = 0, int y = 0)
         {
             int frameCount = 0;
+            mainPanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))); ;
 
             foreach (string key in Information.Keys)
             {
@@ -35,12 +36,14 @@ namespace Gerenciamento_de_Dietas
                 mainPanel.Controls.Add(labeldict[key]);
                 labeldict[key].Click += new System.EventHandler(PanelClick);
                 frameCount ++;
+                labeldict[key].ForeColor = Color.Black;
             }
 
             mainPanel.Location = new Point(x, y);
             mainPanel.Name = "mainPanel";
             mainPanel.Size = new Size(300, 214);
             mainPanel.TabIndex = 0;
+            
 
             mainPanel.Click += new System.EventHandler(PanelClick);
         }
@@ -68,14 +71,17 @@ namespace Gerenciamento_de_Dietas
                     {
                         id = ((Label)c).Text.Replace("Id: ", "");
                         MessageBox.Show(id);
+                        OpenUserEditScreen(id, "usuario");
                     }
                 }
             }
 
         }
-        public void OpenUserEditScreen(string id)
+        public void OpenUserEditScreen(string id, string currentTab)
         {
-            
+            AddForm addScreen = new AddForm();
+            addScreen.startup();
+            addScreen.ShowDialog();
         }
     }
 }

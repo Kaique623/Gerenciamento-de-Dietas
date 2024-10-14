@@ -69,3 +69,9 @@ C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamen
 C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\obj\Debug\net6.0-windows\Gerenciamento de Dietas.pdb
 C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\obj\Debug\net6.0-windows\Gerenciamento de Dietas.genruntimeconfig.cache
 C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\obj\Debug\net6.0-windows\ref\Gerenciamento de Dietas.dll
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\bin\Debug\net6.0-windows\SlintDotnet.dll
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\bin\Debug\net6.0-windows\Syncfusion.Licensing.dll
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\bin\Debug\net6.0-windows\Syncfusion.Shared.WPF.dll
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\bin\Debug\net6.0-windows\runtimes\linux-arm\native\libslint_dotnet.so
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\bin\Debug\net6.0-windows\runtimes\linux-arm64\native\libslint_dotnet.so
+C:\Users\997979\OneDrive - SENAC em Minas - EDU\Área de Trabalho\c#\Gerenciamento de Dietas\bin\Debug\net6.0-windows\runtimes\linux-x64\native\libslint_dotnet.so

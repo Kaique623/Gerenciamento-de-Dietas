@@ -159,6 +159,50 @@
           }
         }
       },
+      "SlintDotnet/1.7.1": {
+        "runtime": {
+          "lib/netstandard2.0/SlintDotnet.dll": {
+            "assemblyVersion": "1.7.1.0",
+            "fileVersion": "1.7.1.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libslint_dotnet.so": {
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-arm64/native/libslint_dotnet.so": {
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libslint_dotnet.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Syncfusion.Licensing/27.1.52": {
+        "runtime": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "27.1.52.0",
+            "fileVersion": "27.1.52.0"
+          }
+        }
+      },
+      "Syncfusion.Shared.WPF/27.1.52": {
+        "dependencies": {
+          "Syncfusion.Licensing": "27.1.52"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/Syncfusion.Shared.WPF.dll": {
+            "assemblyVersion": "27.1.52.0",
+            "fileVersion": "27.1.52.0"
+          }
+        }
+      },
       "System.Buffers/4.5.1": {},
       "System.Configuration.ConfigurationManager/8.0.0": {
         "dependencies": {
@@ -422,6 +466,27 @@
       "sha512": "sha512-mROMnm+BX4cBGUeLiR3aq243f9JLD3yAkVh1MbLBWFt/wFt1bb9QjqQtcsHcIQAufOwvhF5+aeu/5akS8J8upQ==",
       "path": "questpdf/2024.10.0",
       "hashPath": "questpdf.2024.10.0.nupkg.sha512"
+    },
+    "SlintDotnet/1.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-naKX26KP/OqqlWkMfXEiFfJRk2OJf/ZqXVzFVp5ZLY9kKcMU2Rqzljf1GLFtads75wR3XL2ONyPrzzur/ejCCg==",
+      "path": "slintdotnet/1.7.1",
+      "hashPath": "slintdotnet.1.7.1.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/27.1.52": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-st24vdjzGwbUs4OvM7EmCfZpyf724Tf3xectuYGGhqMtObr1bNEzCQWUZA2Ftz+xmpat7zNR+2XusQ+qY7q2xQ==",
+      "path": "syncfusion.licensing/27.1.52",
+      "hashPath": "syncfusion.licensing.27.1.52.nupkg.sha512"
+    },
+    "Syncfusion.Shared.WPF/27.1.52": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bPl+Gh2yqtM/tGNR+I7ffvOxLmnpdT3haKEonXMxjpvu/HVagFcs4LNom207upI4NLZXkC+QpIKibiU4KRbmAg==",
+      "path": "syncfusion.shared.wpf/27.1.52",
+      "hashPath": "syncfusion.shared.wpf.27.1.52.nupkg.sha512"
     },
     "System.Buffers/4.5.1": {
       "type": "package",
