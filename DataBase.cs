@@ -65,7 +65,7 @@ namespace Gerenciamento_de_Dietas
                 adapter.SelectCommand = new MySqlCommand($"SELECT {table}.id as Id, {table}.nome as Nome, " +
                     $"{table}.horario as Horario, dieta.nome as Dieta FROM {table} LEFT JOIN dieta ON dieta.id = " +
                     $"{table}.id_dieta {condition}" , connection);
-            else if (table == "usuario")
+            else if (table == "usuario" && !condition.StartsWith("WHERE id="))
                 adapter.SelectCommand = new MySqlCommand($"SELECT {table}.id as Id, {table}.nome as Nome, " +
                     $"{table}.tipo as Tipo, dieta.nome as Dieta, {table}.Genero, {table}.Idade, {table}.Altura, {table}.Peso,{table}.email as Email FROM {table} LEFT JOIN dieta ON dieta.id = " +
                     $"{table}.dieta {condition}", connection);

@@ -12,7 +12,7 @@
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\997979\.nuget\packages\" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgSyncfusion_Shared_WPF Condition=" '$(PkgSyncfusion_Shared_WPF)' == '' ">C:\Users\997979\.nuget\packages\syncfusion.shared.wpf\27.1.52</PkgSyncfusion_Shared_WPF>
-  </PropertyGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)recrovit.recrogridframework.client.blazor.syncfusionui\8.9.0\buildTransitive\Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.props" Condition="Exists('$(NuGetPackageRoot)recrovit.recrogridframework.client.blazor.syncfusionui\8.9.0\buildTransitive\Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.props')" />
+  </ImportGroup>
 </Project>

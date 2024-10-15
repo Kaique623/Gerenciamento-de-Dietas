@@ -80,7 +80,7 @@ namespace Gerenciamento_de_Dietas
         public void OpenUserEditScreen(string id, string currentTab)
         {
             AddForm addScreen = new AddForm();
-            addScreen.startup();
+            addScreen.startup(new List<string>() {"a", "b", "c"}, currentTab, id);
             addScreen.ShowDialog();
         }
     }

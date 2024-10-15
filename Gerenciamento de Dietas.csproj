@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.6" />
+    <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
     <PackageReference Include="MySql.Data" Version="9.0.0" />
     <PackageReference Include="QuestPDF" Version="2024.10.0" />
-    <PackageReference Include="SlintDotnet" Version="1.7.1" />
-    <PackageReference Include="Syncfusion.Shared.WPF" Version="27.1.52" />
+    <PackageReference Include="Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI" Version="8.9.0" />
   </ItemGroup>
 
   <ItemGroup>

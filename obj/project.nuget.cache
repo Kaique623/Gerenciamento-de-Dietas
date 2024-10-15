@@ -1,27 +1,31 @@
 {
   "version": 2,
-  "dgSpecHash": "71SPAPgBxhx9fvwCKJxO5gbFe6S/bAgGdo8jM1Y/U43RtFNwOOHoOGhdLW83EXBvdgheEb/2XY7hKKj1F99I2A==",
+  "dgSpecHash": "1K+mC7Q5wV2HHbt14fyNRWVBZgQRozIzRGrEdq0gcURLqS+iVcW1nIj8PM/ykeSRZizG8GBgjLprD/ayvolcFQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\997979\\OneDrive - SENAC em Minas - EDU\\Área de Trabalho\\c#\\Gerenciamento de Dietas\\Gerenciamento de Dietas.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\997979\\.nuget\\packages\\bouncycastle.cryptography\\2.4.0\\bouncycastle.cryptography.2.4.0.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",
-    "C:\\Users\\997979\\.nuget\\packages\\itextsharp\\5.5.13.4\\itextsharp.5.5.13.4.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\guna.ui2.winforms\\2.0.4.6\\guna.ui2.winforms.2.0.4.6.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\k4os.compression.lz4\\1.3.8\\k4os.compression.lz4.1.3.8.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.8\\k4os.compression.lz4.streams.1.3.8.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\materialdesigncolors\\1.1.0\\materialdesigncolors.1.1.0.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\materialdesignthemes.wpf\\1.0.1\\materialdesignthemes.wpf.1.0.1.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\mysql.data\\9.0.0\\mysql.data.9.0.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\questpdf\\2024.10.0\\questpdf.2024.10.0.nupkg.sha512",
-    "C:\\Users\\997979\\.nuget\\packages\\slintdotnet\\1.7.1\\slintdotnet.1.7.1.nupkg.sha512",
-    "C:\\Users\\997979\\.nuget\\packages\\syncfusion.licensing\\27.1.52\\syncfusion.licensing.27.1.52.nupkg.sha512",
-    "C:\\Users\\997979\\.nuget\\packages\\syncfusion.shared.wpf\\27.1.52\\syncfusion.shared.wpf.27.1.52.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\recrovit.recrogridframework.client.blazor.syncfusionui\\8.9.0\\recrovit.recrogridframework.client.blazor.syncfusionui.8.9.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\system.data.datasetextensions\\4.6.0-preview3.19128.7\\system.data.datasetextensions.4.6.0-preview3.19128.7.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.1\\system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
+    "C:\\Users\\997979\\.nuget\\packages\\system.management\\6.0.0\\system.management.6.0.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\997979\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
@@ -40,11 +44,21 @@
   ],
   "logs": [
     {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "MaterialDesignThemes.Wpf 1.0.1 depende de MaterialDesignColors (>= 1.0.1), mas MaterialDesignColors 1.0.1 não foi encontrado. A melhor correspondência aproximada de MaterialDesignColors 1.1.0 foi resolvida.",
+      "libraryId": "MaterialDesignColors",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "O pacote 'iTextSharp 5.5.13.4' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' em vez da estrutura de destino do projeto 'net6.0-windows7.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "libraryId": "iTextSharp",
+      "message": "O pacote 'MaterialDesignColors 1.1.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' em vez da estrutura de destino do projeto 'net6.0-windows7.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
+      "libraryId": "MaterialDesignColors",
       "targetGraphs": [
         "net6.0-windows7.0"
       ]

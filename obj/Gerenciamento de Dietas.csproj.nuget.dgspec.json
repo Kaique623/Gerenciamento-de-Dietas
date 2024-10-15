@@ -40,6 +40,14 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Guna.UI2.WinForms": {
+              "target": "Package",
+              "version": "[2.0.4.6, )"
+            },
+            "MaterialDesignThemes.Wpf": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -48,17 +56,9 @@
               "target": "Package",
               "version": "[2024.10.0, )"
             },
-            "SlintDotnet": {
+            "Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI": {
               "target": "Package",
-              "version": "[1.7.1, )"
-            },
-            "Syncfusion.Shared.WPF": {
-              "target": "Package",
-              "version": "[27.1.52, )"
-            },
-            "iTextSharp": {
-              "target": "Package",
-              "version": "[5.5.13.4, )"
+              "version": "[8.9.0, )"
             }
           },
           "imports": [

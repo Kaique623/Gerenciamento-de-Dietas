@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "BouncyCastle.Cryptography/2.4.0": {
+      "BouncyCastle.Cryptography/2.3.1": {
         "type": "package",
         "compile": {
           "lib/net6.0/BouncyCastle.Cryptography.dll": {}
@@ -20,17 +20,20 @@
           "lib/net5.0/Google.Protobuf.dll": {}
         }
       },
-      "iTextSharp/5.5.13.4": {
+      "Guna.UI2.WinForms/2.0.4.6": {
         "type": "package",
         "dependencies": {
-          "BouncyCastle.Cryptography": "2.4.0"
+          "System.Management": "6.0.0"
         },
         "compile": {
-          "lib/net461/itextsharp.dll": {}
+          "lib/net6.0-windows7.0/Guna.UI2.dll": {}
         },
         "runtime": {
-          "lib/net461/itextsharp.dll": {}
-        }
+          "lib/net6.0-windows7.0/Guna.UI2.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
       },
       "K4os.Compression.LZ4/1.3.8": {
         "type": "package",
@@ -62,6 +65,41 @@
         },
         "runtime": {
           "lib/net6.0/K4os.Hash.xxHash.dll": {}
+        }
+      },
+      "MaterialDesignColors/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/MaterialDesignColors.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MaterialDesignColors.dll": {}
+        }
+      },
+      "MaterialDesignThemes.Wpf/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "MaterialDesignColors": "1.0.1",
+          "Microsoft.CSharp": "4.6.0",
+          "System.Data.DataSetExtensions": "4.6.0-preview3.19128.7"
+        },
+        "compile": {
+          "lib/netcoreapp3.0/MaterialDesignThemes.Wpf.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/MaterialDesignThemes.Wpf.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "Microsoft.CSharp/4.6.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {
@@ -170,48 +208,13 @@
           }
         }
       },
-      "SlintDotnet/1.7.1": {
+      "Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI/8.9.0": {
         "type": "package",
-        "compile": {
-          "lib/netstandard2.0/SlintDotnet.dll": {}
+        "build": {
+          "buildTransitive/Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.props": {}
         },
-        "runtime": {
-          "lib/netstandard2.0/SlintDotnet.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/linux-arm/native/libslint_dotnet.so": {
-            "assetType": "native",
-            "rid": "linux-arm"
-          },
-          "runtimes/linux-arm64/native/libslint_dotnet.so": {
-            "assetType": "native",
-            "rid": "linux-arm64"
-          },
-          "runtimes/linux-x64/native/libslint_dotnet.so": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          }
-        }
-      },
-      "Syncfusion.Licensing/27.1.52": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/Syncfusion.Licensing.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Syncfusion.Licensing.dll": {}
-        }
-      },
-      "Syncfusion.Shared.WPF/27.1.52": {
-        "type": "package",
-        "dependencies": {
-          "Syncfusion.Licensing": "27.1.52"
-        },
-        "compile": {
-          "lib/net6.0-windows7.0/Syncfusion.Shared.WPF.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0-windows7.0/Syncfusion.Shared.WPF.dll": {}
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.props": {}
         }
       },
       "System.Buffers/4.5.1": {
@@ -221,6 +224,18 @@
         },
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
+        }
+      },
+      "System.CodeDom/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.CodeDom.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/System.CodeDom.dll": {}
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
       "System.Configuration.ConfigurationManager/8.0.0": {
@@ -236,6 +251,15 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "System.Data.DataSetExtensions/4.6.0-preview3.19128.7": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.Data.DataSetExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Data.DataSetExtensions.dll": {}
         }
       },
       "System.Diagnostics.DiagnosticSource/8.0.1": {
@@ -276,6 +300,27 @@
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
+      "System.Management/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.CodeDom": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/System.Management.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/System.Management.dll": {}
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Management.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
         }
       },
       "System.Reflection/4.3.0": {
@@ -481,16 +526,16 @@
     }
   },
   "libraries": {
-    "BouncyCastle.Cryptography/2.4.0": {
-      "sha512": "SwXsAV3sMvAU/Nn31pbjhWurYSjJ+/giI/0n6tCrYoupEK34iIHCuk3STAd9fx8yudM85KkLSVdn951vTng/vQ==",
+    "BouncyCastle.Cryptography/2.3.1": {
+      "sha512": "buwoISwecYke3CmgG1AQSg+sNZjJeIb93vTAtJiHZX35hP/teYMxsfg0NDXGUKjGx6BKBTNKc77O2M3vKvlXZQ==",
       "type": "package",
-      "path": "bouncycastle.cryptography/2.4.0",
+      "path": "bouncycastle.cryptography/2.3.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "README.md",
-        "bouncycastle.cryptography.2.4.0.nupkg.sha512",
+        "bouncycastle.cryptography.2.3.1.nupkg.sha512",
         "bouncycastle.cryptography.nuspec",
         "lib/net461/BouncyCastle.Cryptography.dll",
         "lib/net461/BouncyCastle.Cryptography.xml",
@@ -524,20 +569,26 @@
         "lib/netstandard2.0/Google.Protobuf.xml"
       ]
     },
-    "iTextSharp/5.5.13.4": {
-      "sha512": "/cvCNv8AJ+XuD99u4NfHSSxkBJKTdvP36wcfQF9V1Cjzi1ycyFSa4vJ64a3DhFVUTKVO60WF8OmAqngQDTHgYA==",
+    "Guna.UI2.WinForms/2.0.4.6": {
+      "sha512": "NYzSJp7e47Cz3NgGCHvzadash8ycmxxUnpLg4Rr/MSYG9WDw0HOoTI4SkbDW+HbACrf6tsWYCuzWkgvjuM/O6w==",
       "type": "package",
-      "path": "itextsharp/5.5.13.4",
+      "path": "guna.ui2.winforms/2.0.4.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.md",
-        "gnu-agpl-v3.0.md",
-        "itextsharp.5.5.13.4.nupkg.sha512",
-        "itextsharp.nuspec",
-        "lib/net461/iTextSharp.xml",
-        "lib/net461/itextsharp.dll",
-        "notice.txt"
+        "LICENSE.txt",
+        "README.md",
+        "guna.ui2.winforms.2.0.4.6.nupkg.sha512",
+        "guna.ui2.winforms.nuspec",
+        "icon.png",
+        "lib/net40/Guna.UI2.dll",
+        "lib/net45/Guna.UI2.dll",
+        "lib/net461/Guna.UI2.dll",
+        "lib/net472/Guna.UI2.dll",
+        "lib/net48/Guna.UI2.dll",
+        "lib/net6.0-windows7.0/Guna.UI2.dll",
+        "lib/net7.0-windows7.0/Guna.UI2.dll",
+        "lib/netcoreapp3.1/Guna.UI2.dll"
       ]
     },
     "K4os.Compression.LZ4/1.3.8": {
@@ -601,6 +652,100 @@
         "lib/netstandard2.0/K4os.Hash.xxHash.xml",
         "lib/netstandard2.1/K4os.Hash.xxHash.dll",
         "lib/netstandard2.1/K4os.Hash.xxHash.xml"
+      ]
+    },
+    "MaterialDesignColors/1.1.0": {
+      "sha512": "Wma4WCwqZAy1DfTfzW59u4H7vaNK8XbE5LhKXYSUKk4ShY6igQYN06YWcpDDJcXFWzjpaiV3KvGk0hHR9CkYeQ==",
+      "type": "package",
+      "path": "materialdesigncolors/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/MaterialDesignColors.dll",
+        "materialdesigncolors.1.1.0.nupkg.sha512",
+        "materialdesigncolors.nuspec"
+      ]
+    },
+    "MaterialDesignThemes.Wpf/1.0.1": {
+      "sha512": "goEShYguOoPYJ+oBtWWMEsZFK5CL+524m2fekyLQaMkcECu2K9mYv0yJiXARQM6qr6YdF6iDuR0Bx9BunrLFzQ==",
+      "type": "package",
+      "path": "materialdesignthemes.wpf/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/MaterialDesignThemes.Wpf.dll",
+        "lib/netcoreapp3.0/MaterialDesignThemes.Wpf.dll",
+        "materialdesignthemes.wpf.1.0.1.nupkg.sha512",
+        "materialdesignthemes.wpf.nuspec"
+      ]
+    },
+    "Microsoft.CSharp/4.6.0": {
+      "sha512": "kxn3M2rnAGy5N5DgcIwcE8QTePWU/XiYcQVzn9HqTls2NKluVzVSmVWRjK7OUPWbljCXuZxHyhEz9kPRIQeXow==",
+      "type": "package",
+      "path": "microsoft.csharp/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/Microsoft.CSharp.dll",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.3/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/uap10.0.16299/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "microsoft.csharp.4.6.0.nupkg.sha512",
+        "microsoft.csharp.nuspec",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/Microsoft.CSharp.dll",
+        "ref/netcore50/Microsoft.CSharp.xml",
+        "ref/netcore50/de/Microsoft.CSharp.xml",
+        "ref/netcore50/es/Microsoft.CSharp.xml",
+        "ref/netcore50/fr/Microsoft.CSharp.xml",
+        "ref/netcore50/it/Microsoft.CSharp.xml",
+        "ref/netcore50/ja/Microsoft.CSharp.xml",
+        "ref/netcore50/ko/Microsoft.CSharp.xml",
+        "ref/netcore50/ru/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hans/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hant/Microsoft.CSharp.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.0/Microsoft.CSharp.dll",
+        "ref/netstandard1.0/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/de/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/es/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/fr/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/it/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ja/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ko/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ru/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hans/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hant/Microsoft.CSharp.xml",
+        "ref/netstandard2.0/Microsoft.CSharp.dll",
+        "ref/netstandard2.0/Microsoft.CSharp.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/uap10.0.16299/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
@@ -729,84 +874,25 @@
         "runtimes/win-x86/native/QuestPdfSkia.dll"
       ]
     },
-    "SlintDotnet/1.7.1": {
-      "sha512": "naKX26KP/OqqlWkMfXEiFfJRk2OJf/ZqXVzFVp5ZLY9kKcMU2Rqzljf1GLFtads75wR3XL2ONyPrzzur/ejCCg==",
+    "Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI/8.9.0": {
+      "sha512": "OBmZd8tCdNQYHU09lO7mBgALnNpesxF4zKMlIsmVJCclknzmdPhsFF1AA7df6uS0WXpLfCPv46YgnkNkTPyTfg==",
       "type": "package",
-      "path": "slintdotnet/1.7.1",
+      "path": "recrovit.recrogridframework.client.blazor.syncfusionui/8.9.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.md",
         "README.md",
-        "analyzers/dotnet/cs/SlintDotnet.dll",
-        "icon.png",
-        "lib/netstandard2.0/SlintDotnet.dll",
-        "runtimes/linux-arm/native/libslint_dotnet.so",
-        "runtimes/linux-arm64/native/libslint_dotnet.so",
-        "runtimes/linux-x64/native/libslint_dotnet.so",
-        "slintdotnet.1.7.1.nupkg.sha512",
-        "slintdotnet.nuspec"
-      ]
-    },
-    "Syncfusion.Licensing/27.1.52": {
-      "sha512": "st24vdjzGwbUs4OvM7EmCfZpyf724Tf3xectuYGGhqMtObr1bNEzCQWUZA2Ftz+xmpat7zNR+2XusQ+qY7q2xQ==",
-      "type": "package",
-      "path": "syncfusion.licensing/27.1.52",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "lib/MonoAndroid90/Syncfusion.Licensing.dll",
-        "lib/Xamarin.Mac/Syncfusion.Licensing.dll",
-        "lib/Xamarin.iOS10/Syncfusion.Licensing.dll",
-        "lib/net40/Syncfusion.Licensing.dll",
-        "lib/net45/Syncfusion.Licensing.dll",
-        "lib/net462/Syncfusion.Licensing.dll",
-        "lib/net6.0/Syncfusion.Licensing.dll",
-        "lib/net7.0/Syncfusion.Licensing.dll",
-        "lib/net8.0/Syncfusion.Licensing.dll",
-        "lib/netstandard2.0/Syncfusion.Licensing.dll",
-        "lib/uap10.0/Syncfusion.Licensing.dll",
-        "syncfusion.licensing.27.1.52.nupkg.sha512",
-        "syncfusion.licensing.nuspec",
-        "syncfusion_logo.png"
-      ]
-    },
-    "Syncfusion.Shared.WPF/27.1.52": {
-      "sha512": "bPl+Gh2yqtM/tGNR+I7ffvOxLmnpdT3haKEonXMxjpvu/HVagFcs4LNom207upI4NLZXkC+QpIKibiU4KRbmAg==",
-      "type": "package",
-      "path": "syncfusion.shared.wpf/27.1.52",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "lib/net40/Design/Syncfusion.Design.Wpf.dll",
-        "lib/net40/Design/Syncfusion.Shared.WPF.DesignTools.dll",
-        "lib/net40/Design/Syncfusion.Shared.Wpf.Expression.Design.dll",
-        "lib/net40/Design/Syncfusion.Shared.Wpf.VisualStudio.Design.dll",
-        "lib/net40/Design/Syncfusion.Shared.Wpf.dll.Design.dll",
-        "lib/net40/Syncfusion.Shared.WPF.dll",
-        "lib/net40/Syncfusion.Shared.WPF.xml",
-        "lib/net462/Design/Syncfusion.Design.Wpf.dll",
-        "lib/net462/Design/Syncfusion.Shared.WPF.DesignTools.dll",
-        "lib/net462/Design/Syncfusion.Shared.Wpf.Expression.Design.dll",
-        "lib/net462/Design/Syncfusion.Shared.Wpf.VisualStudio.Design.dll",
-        "lib/net462/Design/Syncfusion.Shared.Wpf.dll.Design.dll",
-        "lib/net462/Syncfusion.Shared.WPF.dll",
-        "lib/net462/Syncfusion.Shared.WPF.xml",
-        "lib/net6.0-windows7.0/Design/Syncfusion.Shared.WPF.DesignTools.dll",
-        "lib/net6.0-windows7.0/Syncfusion.Shared.WPF.dll",
-        "lib/net6.0-windows7.0/Syncfusion.Shared.WPF.xml",
-        "lib/net8.0-windows7.0/Design/Syncfusion.Shared.WPF.DesignTools.dll",
-        "lib/net8.0-windows7.0/Syncfusion.Shared.WPF.dll",
-        "lib/net8.0-windows7.0/Syncfusion.Shared.WPF.xml",
-        "syncfusion.shared.wpf.27.1.52.nupkg.sha512",
-        "syncfusion.shared.wpf.nuspec",
-        "syncfusion_logo.png",
-        "tools/VisualStudioToolsManifest.xml"
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "build/Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.props",
+        "buildMultiTargeting/Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.props",
+        "buildTransitive/Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.props",
+        "lib/net8.0/Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI.dll",
+        "recrovit.recrogridframework.client.blazor.syncfusionui.8.9.0.nupkg.sha512",
+        "recrovit.recrogridframework.client.blazor.syncfusionui.nuspec",
+        "staticwebassets/css/syncfusion-dark-theme.min.css",
+        "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css",
+        "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map",
+        "staticwebassets/scripts/syncfusion-theme.js"
       ]
     },
     "System.Buffers/4.5.1": {
@@ -840,6 +926,29 @@
         "version.txt"
       ]
     },
+    "System.CodeDom/6.0.0": {
+      "sha512": "CPc6tWO1LAer3IzfZufDBRL+UZQcj5uS207NHALQzP84Vp/z6wF0Aa0YZImOQY8iStY0A2zI/e3ihKNPfUm8XA==",
+      "type": "package",
+      "path": "system.codedom/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.CodeDom.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.CodeDom.dll",
+        "lib/net461/System.CodeDom.xml",
+        "lib/net6.0/System.CodeDom.dll",
+        "lib/net6.0/System.CodeDom.xml",
+        "lib/netstandard2.0/System.CodeDom.dll",
+        "lib/netstandard2.0/System.CodeDom.xml",
+        "system.codedom.6.0.0.nupkg.sha512",
+        "system.codedom.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Configuration.ConfigurationManager/8.0.0": {
       "sha512": "JlYi9XVvIREURRUlGMr1F6vOFLk7YSY4p1vHo4kX3tQ0AGrjqlRWHDi66ImHhy6qwXBG3BJ6Y1QlYQ+Qz6Xgww==",
       "type": "package",
@@ -868,6 +977,26 @@
         "system.configuration.configurationmanager.8.0.0.nupkg.sha512",
         "system.configuration.configurationmanager.nuspec",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Data.DataSetExtensions/4.6.0-preview3.19128.7": {
+      "sha512": "ZFJYYi41Wf4xlFKuuRUblw8yThgzBTYeZTs7eGU7sDiu+X+BmeIdT3pstCrmLpDyflDIBuKX1VYmBCGKo14h6w==",
+      "type": "package",
+      "path": "system.data.datasetextensions/4.6.0-preview3.19128.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net45/_._",
+        "lib/netstandard2.0/System.Data.DataSetExtensions.dll",
+        "lib/netstandard2.0/System.Data.DataSetExtensions.xml",
+        "ref/net45/_._",
+        "ref/netstandard2.0/System.Data.DataSetExtensions.dll",
+        "system.data.datasetextensions.4.6.0-preview3.19128.7.nupkg.sha512",
+        "system.data.datasetextensions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Diagnostics.DiagnosticSource/8.0.1": {
@@ -1002,6 +1131,34 @@
         "lib/netstandard2.0/System.IO.Pipelines.xml",
         "system.io.pipelines.6.0.3.nupkg.sha512",
         "system.io.pipelines.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Management/6.0.0": {
+      "sha512": "sHsESYMmPDhQuOC66h6AEOs/XowzKsbT9srMbX71TCXP58hkpn1BqBjdmKj1+DCA/WlBETX1K5WjQHwmV0Txrg==",
+      "type": "package",
+      "path": "system.management/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Management.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/_._",
+        "lib/net6.0/System.Management.dll",
+        "lib/net6.0/System.Management.xml",
+        "lib/netcoreapp3.1/System.Management.dll",
+        "lib/netcoreapp3.1/System.Management.xml",
+        "lib/netstandard2.0/System.Management.dll",
+        "lib/netstandard2.0/System.Management.xml",
+        "runtimes/win/lib/net6.0/System.Management.dll",
+        "runtimes/win/lib/net6.0/System.Management.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Management.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Management.xml",
+        "system.management.6.0.0.nupkg.sha512",
+        "system.management.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -1729,11 +1886,11 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "Guna.UI2.WinForms >= 2.0.4.6",
+      "MaterialDesignThemes.Wpf >= 1.0.1",
       "MySql.Data >= 9.0.0",
       "QuestPDF >= 2024.10.0",
-      "SlintDotnet >= 1.7.1",
-      "Syncfusion.Shared.WPF >= 27.1.52",
-      "iTextSharp >= 5.5.13.4"
+      "Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI >= 8.9.0"
     ]
   },
   "packageFolders": {
@@ -1775,6 +1932,14 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "Guna.UI2.WinForms": {
+            "target": "Package",
+            "version": "[2.0.4.6, )"
+          },
+          "MaterialDesignThemes.Wpf": {
+            "target": "Package",
+            "version": "[1.0.1, )"
+          },
           "MySql.Data": {
             "target": "Package",
             "version": "[9.0.0, )"
@@ -1783,17 +1948,9 @@
             "target": "Package",
             "version": "[2024.10.0, )"
           },
-          "SlintDotnet": {
+          "Recrovit.RecroGridFramework.Client.Blazor.SyncfusionUI": {
             "target": "Package",
-            "version": "[1.7.1, )"
-          },
-          "Syncfusion.Shared.WPF": {
-            "target": "Package",
-            "version": "[27.1.52, )"
-          },
-          "iTextSharp": {
-            "target": "Package",
-            "version": "[5.5.13.4, )"
+            "version": "[8.9.0, )"
           }
         },
         "imports": [
@@ -1820,11 +1977,21 @@
   },
   "logs": [
     {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "MaterialDesignThemes.Wpf 1.0.1 depende de MaterialDesignColors (>= 1.0.1), mas MaterialDesignColors 1.0.1 não foi encontrado. A melhor correspondência aproximada de MaterialDesignColors 1.1.0 foi resolvida.",
+      "libraryId": "MaterialDesignColors",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "O pacote 'iTextSharp 5.5.13.4' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' em vez da estrutura de destino do projeto 'net6.0-windows7.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
-      "libraryId": "iTextSharp",
+      "message": "O pacote 'MaterialDesignColors 1.1.0' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' em vez da estrutura de destino do projeto 'net6.0-windows7.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
+      "libraryId": "MaterialDesignColors",
       "targetGraphs": [
         "net6.0-windows7.0"
       ]

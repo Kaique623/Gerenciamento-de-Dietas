@@ -1,82 +1,95 @@
 ﻿using System.Data;
-using iTextSharp.text;
-using iTextSharp;
-using iTextSharp.text.pdf;
-using System.Text;
-using System.IO;
 
 namespace Gerenciamento_de_Dietas
 {
     public partial class AddForm : Form
     {
-        private TextBox TemplateTextBox;
-        private Label TextboxLabel;
-        private CustomPanel templatePanel;
+        Dictionary<string, TextBox> entries = new Dictionary<string, TextBox>();
+        Dictionary<string, CustomPanel> panels = new Dictionary<string, CustomPanel>();
+        DataTable Data = new DataTable();
 
-        private Dictionary<string, CustomPanel> 
+        private int currentEntry = 0;
+
+        int currentRow = 0;
 
         public AddForm()
         {
             InitializeComponent();
         }
-
-        public void startup()
+        public void startup(List<string> entryText, string currentTable, string id)
         {
+            DataTable Data = DataBase.returnColumn($"SELECT * FROM {currentTable} WHERE id={id}");
 
+            foreach (string entry in entryText)
+            {
+                generateEntry(entry);
+            }
+          
+            addPanelsToControl();
+            
+        }
+        private void addPanelsToControl()
+        {
+            foreach (CustomPanel panel in panels.Values)
+            {
+                this.Controls.Add(panel);
+            }   
         }
 
-        private void InitializeComponent()
-        {
-            this.templatePanel = new Gerenciamento_de_Dietas.CustomPanel();
-            this.TemplateTextBox = new System.Windows.Forms.TextBox();
-            this.TextboxLabel = new System.Windows.Forms.Label();
-            this.templatePanel.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // templatePanel
-            // 
-            this.templatePanel.Controls.Add(this.TemplateTextBox);
-            this.templatePanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(203)))), ((int)(((byte)(203)))));
-            this.templatePanel.Location = new System.Drawing.Point(12, 40);
-            this.templatePanel.Name = "templatePanel";
-            this.templatePanel.Size = new System.Drawing.Size(200, 100);
-            this.templatePanel.TabIndex = 0;
-            // 
-            // TemplateTextBox
-            // 
-            this.TemplateTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(203)))), ((int)(((byte)(203)))));
-            this.TemplateTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TemplateTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TemplateTextBox.ForeColor = System.Drawing.Color.Navy;
-            this.TemplateTextBox.Location = new System.Drawing.Point(20, 20);
-            this.TemplateTextBox.Name = "TemplateTextBox";
-            this.TemplateTextBox.Size = new System.Drawing.Size(143, 22);
-            this.TemplateTextBox.TabIndex = 0;
-            this.TemplateTextBox.Text = "123";
-            // 
-            // TextboxLabel
-            // 
-            this.TextboxLabel.AutoSize = true;
-            this.TextboxLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextboxLabel.ForeColor = System.Drawing.Color.Black;
-            this.TextboxLabel.Location = new System.Drawing.Point(25, 24);
-            this.TextboxLabel.Name = "TextboxLabel";
-            this.TextboxLabel.Size = new System.Drawing.Size(98, 21);
-            this.TextboxLabel.TabIndex = 1;
-            this.TextboxLabel.Text = "TextboxLabel";
-            // 
-            // AddForm
-            // 
-            this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(421, 588);
-            this.Controls.Add(this.TextboxLabel);
-            this.Controls.Add(this.templatePanel);
-            this.Name = "AddForm";
-            this.templatePanel.ResumeLayout(false);
-            this.templatePanel.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
 
+        private void generateEntry(string entryText)
+        {
+            panels[entryText] = new CustomPanel();
+            entries[entryText] = new TextBox();
+            Label TextboxLabel = new Label();
+
+            int column = 1;
+
+            if (currentEntry%2 != 0)
+                column = 2;
+
+            TextboxLabel.AutoSize = true;
+            TextboxLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            TextboxLabel.ForeColor = Color.Black;
+            TextboxLabel.Location = new Point(25 + (200 * (column - 1)), 24 + (100 * currentRow));
+            TextboxLabel.Size = new Size(98, 21);
+            TextboxLabel.TabIndex = 0;
+            TextboxLabel.Text = entryText;
+
+            panels[entryText].Controls.Add(entries[entryText]);
+            panels[entryText].ForeColor = Color.FromArgb(203, 203, 203);
+            panels[entryText].Location = new Point(12 + (200 *(column-1)), 40 + (100*currentRow));
+            panels[entryText].Size = new Size(200, 100);
+            panels[entryText].TabIndex = 1;
+
+            entries[entryText].BackColor = Color.FromArgb(203, 203, 203);
+            entries[entryText].BorderStyle = BorderStyle.None;
+            entries[entryText].Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            entries[entryText].ForeColor = Color.Navy;
+            entries[entryText].Location = new Point(20, 20);
+            entries[entryText].Size = new Size(143, 22);
+            entries[entryText].TabIndex = 1;
+
+            currentEntry += 1;
+
+            this.Controls.Add(TextboxLabel);
+
+            if (currentEntry%2 == 0 )
+                currentRow++;
+        }
+        private void Save(object sender, EventArgs e)
+        {
+            string columns = "";
+            foreach (DataColumn column in Data.Columns)
+                if (columns != "")
+                    columns += $", {column.ColumnName}";
+                else
+                    columns += $"{column.ColumnName}";
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
