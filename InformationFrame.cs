@@ -70,7 +70,6 @@ namespace Gerenciamento_de_Dietas
                     if (((Label)c).Text.StartsWith("Id: "))
                     {
                         id = ((Label)c).Text.Replace("Id: ", "");
-                        MessageBox.Show(id);
                         OpenUserEditScreen(id, "usuario");
                     }
                 }
@@ -79,8 +78,17 @@ namespace Gerenciamento_de_Dietas
         }
         public void OpenUserEditScreen(string id, string currentTab)
         {
+            var ValuesList = new List<string>();
+            foreach (string value in labeldict.Keys)
+            {
+                if (value != "Id")
+                {
+                    ValuesList.Add(value);
+                }
+            }
+
             AddForm addScreen = new AddForm();
-            addScreen.startup(new List<string>() {"a", "b", "c"}, currentTab, id);
+            addScreen.startup(ValuesList, currentTab, id);
             addScreen.ShowDialog();
         }
     }

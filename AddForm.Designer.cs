@@ -35,8 +35,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             this.guna2Transition1 = new Guna.UI2.WinForms.Guna2Transition();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.CancelButton = new Guna.UI2.WinForms.Guna2Button();
+            this.ConfirmButton = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // guna2Transition1
@@ -59,59 +59,65 @@
             animation1.TransparencyCoeff = 0F;
             this.guna2Transition1.DefaultAnimation = animation1;
             // 
-            // guna2Button1
+            // CancelButton
             // 
-            this.guna2Button1.Animated = true;
-            this.guna2Button1.AutoRoundedCorners = true;
-            this.guna2Button1.BorderRadius = 21;
-            this.guna2Button1.CustomizableEdges = customizableEdges1;
-            this.guna2Transition1.SetDecoration(this.guna2Button1, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.Red;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(227, 432);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            this.guna2Button1.Size = new System.Drawing.Size(157, 45);
-            this.guna2Button1.TabIndex = 0;
-            this.guna2Button1.Text = "Cancelar";
-            this.guna2Button1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.CancelButton.Animated = true;
+            this.CancelButton.AutoRoundedCorners = true;
+            this.CancelButton.BackColor = System.Drawing.Color.Transparent;
+            this.CancelButton.BorderRadius = 21;
+            this.CancelButton.CustomizableEdges = customizableEdges1;
+            this.guna2Transition1.SetDecoration(this.CancelButton, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.CancelButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CancelButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CancelButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CancelButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CancelButton.FillColor = System.Drawing.Color.Gray;
+            this.CancelButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CancelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(107)))), ((int)(((byte)(107)))));
+            this.CancelButton.HoverState.FillColor = System.Drawing.Color.Red;
+            this.CancelButton.Location = new System.Drawing.Point(227, 543);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.PressedColor = System.Drawing.Color.Gray;
+            this.CancelButton.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            this.CancelButton.Size = new System.Drawing.Size(157, 45);
+            this.CancelButton.TabIndex = 0;
+            this.CancelButton.Text = "Cancelar";
+            this.CancelButton.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.CancelButton.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
-            // guna2Button2
+            // ConfirmButton
             // 
-            this.guna2Button2.Animated = true;
-            this.guna2Button2.AutoRoundedCorners = true;
-            this.guna2Button2.BorderRadius = 21;
-            this.guna2Button2.CustomizableEdges = customizableEdges3;
-            this.guna2Transition1.SetDecoration(this.guna2Button2, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.Lime;
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(27, 432);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            this.guna2Button2.Size = new System.Drawing.Size(157, 45);
-            this.guna2Button2.TabIndex = 1;
-            this.guna2Button2.Text = "Cancelar";
-            this.guna2Button2.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.ConfirmButton.Animated = true;
+            this.ConfirmButton.AutoRoundedCorners = true;
+            this.ConfirmButton.BorderRadius = 21;
+            this.ConfirmButton.CustomizableEdges = customizableEdges3;
+            this.guna2Transition1.SetDecoration(this.ConfirmButton, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.ConfirmButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ConfirmButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ConfirmButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ConfirmButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ConfirmButton.FillColor = System.Drawing.Color.Gray;
+            this.ConfirmButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmButton.ForeColor = System.Drawing.Color.LightGreen;
+            this.ConfirmButton.HoverState.FillColor = System.Drawing.Color.Green;
+            this.ConfirmButton.Location = new System.Drawing.Point(27, 543);
+            this.ConfirmButton.Name = "ConfirmButton";
+            this.ConfirmButton.PressedColor = System.Drawing.Color.Gray;
+            this.ConfirmButton.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            this.ConfirmButton.Size = new System.Drawing.Size(157, 45);
+            this.ConfirmButton.TabIndex = 1;
+            this.ConfirmButton.Text = "Confirmar";
+            this.ConfirmButton.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // AddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(403, 506);
-            this.Controls.Add(this.guna2Button2);
-            this.Controls.Add(this.guna2Button1);
+            this.ClientSize = new System.Drawing.Size(403, 607);
+            this.Controls.Add(this.ConfirmButton);
+            this.Controls.Add(this.CancelButton);
             this.guna2Transition1.SetDecoration(this, Guna.UI2.AnimatorNS.DecorationType.None);
             this.Name = "AddForm";
             this.Text = "AddForm";
@@ -123,7 +129,13 @@
 
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
         private Guna.UI2.WinForms.Guna2Transition guna2Transition1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button CancelButton;
+        private Guna.UI2.WinForms.Guna2Button ConfirmButton;
+        private Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1;
+        private Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2;
+        private Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3;
+        private Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4;
+        private Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5;
+        private Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6;
     }
 }
